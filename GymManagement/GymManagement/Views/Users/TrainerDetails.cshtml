@@ -1,0 +1,52 @@
+﻿@model GymManagement.Models.User
+@{
+    ViewBag.Title = "TrainerDetails";
+}
+
+<h2>Trainer Details</h2>
+<div>
+    <h4>Trainer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        
+        <!--Aici vom avea si review-urile-->
+        <!--Aici avem optiune de adaugare review-->
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Courses")
+</p>

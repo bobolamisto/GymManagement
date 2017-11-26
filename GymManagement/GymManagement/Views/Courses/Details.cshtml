@@ -1,0 +1,68 @@
+﻿@model GymManagement.Models.Course
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Course type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trainers)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th></th>
+                </tr>
+
+               @foreach (var item in Model.Trainers)
+               {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("View Trainer", "TrainerDetails", "Users", new {id = item.UserId}, null)
+                    </td>
+                </tr>
+               }
+
+            </table>
+                        
+</dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
