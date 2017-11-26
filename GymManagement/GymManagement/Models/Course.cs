@@ -6,12 +6,21 @@ using System.Web;
 
 namespace GymManagement.Models
 {
+    public enum CourseDificulty
+    {
+        Easy,
+        Medium,
+        Hard
+    }
+
     public class Course
     {
         [Key]
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public CourseDificulty Dificulty { get; set; }
 
         //antrenorii de la curs
         public virtual ICollection<UserCourse> Trainers { get; set; }

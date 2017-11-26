@@ -1,0 +1,31 @@
+﻿.user-dropdown {
+    color: #999999;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    background-color: transparent !important;
+}
+
+.user-dropdown:hover {
+    text-decoration: none;
+    color: #999999;
+    background-color: transparent !important;
+}
+
+.user-dropdown:focus {
+    text-decoration: none;
+    color: #999999;
+    background-color: transparent !important;
+}
+
+.user-dropdown-menu{
+    background-color: #222222;
+}
+
+.user-dropdown-menu li a{
+    color: #999999;
+}
+
+.user-dropdown-menu li a:hover {
+    background-color: #333333;
+}

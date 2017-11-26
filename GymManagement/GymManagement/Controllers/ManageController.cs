@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GymManagement.Models;
+using GymManagement.Data;
 
 namespace GymManagement.Controllers
 {
@@ -15,6 +16,7 @@ namespace GymManagement.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext databaseContext = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -61,6 +63,7 @@ namespace GymManagement.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeFirstOrLastNameSucces ? "Your Firstname and Lastname has been changed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -68,7 +71,9 @@ namespace GymManagement.Controllers
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                FirstName = databaseContext.Users.Find(userId).FirstName,
+                LastName = databaseContext.Users.Find(userId).LastName,
+            TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
@@ -118,16 +123,37 @@ namespace GymManagement.Controllers
             }
             // Generate the token and send it
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
+            var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.Number,code);
+            if (result.Succeeded)
             {
-                var message = new IdentityMessage
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
                 {
-                    Destination = model.Number,
-                    Body = "Your security code is: " + code
-                };
-                await UserManager.SmsService.SendAsync(message);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            ModelState.AddModelError("", "Failed to verify phone");
+            return View(model);
+        }
+        public ActionResult ChangeFirstOrLastName() {
+
+            return View();
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeFirstOrLastName(ChangeFirstOrLastName model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = databaseContext.Users.Find(User.Identity.GetUserId());
+            user.LastName = model.LastName;
+            user.FirstName = model.FirstName;
+            await databaseContext.SaveChangesAsync();
+            return RedirectToAction("Index", new { Message = ManageMessageId.ChangeFirstOrLastNameSucces });
         }
 
         //
@@ -381,6 +407,7 @@ namespace GymManagement.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ChangeFirstOrLastNameSucces,
             Error
         }
 
