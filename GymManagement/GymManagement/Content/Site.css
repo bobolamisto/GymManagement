@@ -1,6 +1,8 @@
 ﻿body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +23,27 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+/* Footer*/
+.wrapper {
+    flex: 1;
+}
+
+.footer {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #222222;
+    color: #999999;
+}
+
+.footer container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.footer h3 {
+    border-bottom: 1px solid #999999;
+    padding-bottom: 10px;
 }
