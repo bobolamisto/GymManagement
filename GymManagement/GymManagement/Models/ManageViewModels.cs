@@ -12,6 +12,8 @@ namespace GymManagement.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -38,7 +40,15 @@ namespace GymManagement.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-
+    public class ChangeFirstOrLastName
+    {
+        [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+    }
     public class ChangePasswordViewModel
     {
         [Required]

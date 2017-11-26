@@ -190,16 +190,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserSchedulerController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711261329312_DB.cs" />
-    <Compile Include="Migrations\201711261329312_DB.Designer.cs">
-      <DependentUpon>201711261329312_DB.cs</DependentUpon>
+    <Compile Include="Migrations\201711261633585_DB.cs" />
+    <Compile Include="Migrations\201711261633585_DB.Designer.cs">
+      <DependentUpon>201711261633585_DB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,6 +223,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Header.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,6 +283,20 @@
     <Content Include="Views\UserScheduler\Details.cshtml" />
     <Content Include="Views\UserScheduler\Edit.cshtml" />
     <Content Include="Views\UserScheduler\Index.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\TrainerDetails.cshtml" />
+    <Content Include="Views\Manage\ChangeFirstOrLastName.cshtml" />
+    <Content Include="Views\Shared\_UserMenuPartial.cshtml" />
+    <Content Include="Views\Shared\_FooterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -298,8 +315,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711261329312_DB.resx">
-      <DependentUpon>201711261329312_DB.cs</DependentUpon>
+
+    <EmbeddedResource Include="Migrations\201711261633585_DB.resx">
+      <DependentUpon>201711261633585_DB.cs</DependentUpon>
+
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

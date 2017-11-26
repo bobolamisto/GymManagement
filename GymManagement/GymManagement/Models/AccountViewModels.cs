@@ -79,6 +79,20 @@ namespace GymManagement.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name ="Firstname")]
+        public string FirstName { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name ="Lastname")]
+        public string LastName { get; set; }
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name ="Phone no.")]
+        public string PhoneNumber { get; set; }
+
     }
 
     public class ResetPasswordViewModel

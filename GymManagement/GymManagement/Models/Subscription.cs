@@ -11,7 +11,7 @@ namespace GymManagement.Models
         [Key]
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
-        public TimeSpan Validity { get; set; }
+        public int Validity { get; set; } // in days
 
         //abonamentul corespunde unui pachet/ unei oferte
         public int PackageId { get; set; }
