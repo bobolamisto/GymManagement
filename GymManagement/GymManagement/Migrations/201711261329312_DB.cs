@@ -164,15 +164,14 @@ namespace GymManagement.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
+                        UserId = c.String(maxLength: 128),
                         SchedulerId = c.Int(nullable: false),
-                        User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Schedulers", t => t.SchedulerId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
-                .Index(t => t.SchedulerId)
-                .Index(t => t.User_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.SchedulerId);
             
             CreateTable(
                 "dbo.Subscriptions",
@@ -205,7 +204,7 @@ namespace GymManagement.Migrations
             DropForeignKey("dbo.Schedulers", "RoomId", "dbo.Rooms");
             DropForeignKey("dbo.AspNetUsers", "SubscriptionId", "dbo.Subscriptions");
             DropForeignKey("dbo.Subscriptions", "PackageId", "dbo.Packages");
-            DropForeignKey("dbo.UserSchedulers", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserSchedulers", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserSchedulers", "SchedulerId", "dbo.Schedulers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -218,8 +217,8 @@ namespace GymManagement.Migrations
             DropForeignKey("dbo.Rooms", "AddressId", "dbo.Addresses");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Subscriptions", new[] { "PackageId" });
-            DropIndex("dbo.UserSchedulers", new[] { "User_Id" });
             DropIndex("dbo.UserSchedulers", new[] { "SchedulerId" });
+            DropIndex("dbo.UserSchedulers", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });

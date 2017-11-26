@@ -13,7 +13,7 @@ namespace GymManagement.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711261157513_DB"; }
+            get { return "201711261329312_DB"; }
         }
         
         string IMigrationMetadata.Source

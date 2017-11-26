@@ -192,17 +192,19 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserSchedulerController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711261157513_DB.cs" />
-    <Compile Include="Migrations\201711261157513_DB.Designer.cs">
-      <DependentUpon>201711261157513_DB.cs</DependentUpon>
+    <Compile Include="Migrations\201711261329312_DB.cs" />
+    <Compile Include="Migrations\201711261329312_DB.Designer.cs">
+      <DependentUpon>201711261329312_DB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\ScheduleTable.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseType.cs" />
     <Compile Include="Models\Package.cs" />
@@ -273,6 +275,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\UserScheduler\Create.cshtml" />
+    <Content Include="Views\UserScheduler\Delete.cshtml" />
+    <Content Include="Views\UserScheduler\Details.cshtml" />
+    <Content Include="Views\UserScheduler\Edit.cshtml" />
+    <Content Include="Views\UserScheduler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -291,8 +298,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711261157513_DB.resx">
-      <DependentUpon>201711261157513_DB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711261329312_DB.resx">
+      <DependentUpon>201711261329312_DB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
