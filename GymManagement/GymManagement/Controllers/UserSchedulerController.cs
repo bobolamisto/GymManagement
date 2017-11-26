@@ -29,7 +29,7 @@ namespace GymManagement.Controllers
                 {
                     Course course = db.Courses.ToList().Where(c => c.Id == schedule.Scheduler.CourseId).FirstOrDefault();
                     
-                        if (schedule.Scheduler.DateTime.Hour == i){
+                        if (schedule.Scheduler.DateTime.Hour >= i && schedule.Scheduler.DateTime.Hour < i+2){
                             if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Monday"))
                             {
                                 courseName[0] = course.Name;
