@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserSchedulerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -205,6 +206,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\ScheduleTable.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseType.cs" />
     <Compile Include="Models\Package.cs" />
@@ -276,6 +278,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\UserScheduler\Create.cshtml" />
+    <Content Include="Views\UserScheduler\Delete.cshtml" />
+    <Content Include="Views\UserScheduler\Details.cshtml" />
+    <Content Include="Views\UserScheduler\Edit.cshtml" />
+    <Content Include="Views\UserScheduler\Index.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
     <Content Include="Views\Courses\Details.cshtml" />
@@ -290,7 +297,6 @@
     <Content Include="Views\Manage\ChangeFirstOrLastName.cshtml" />
     <Content Include="Views\Shared\_UserMenuPartial.cshtml" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,8 +315,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+
     <EmbeddedResource Include="Migrations\201711261633585_DB.resx">
       <DependentUpon>201711261633585_DB.cs</DependentUpon>
+
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
