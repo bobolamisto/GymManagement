@@ -3,7 +3,7 @@ namespace GymManagement.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Db : DbMigration
+    public partial class DB : DbMigration
     {
         public override void Up()
         {
@@ -103,7 +103,7 @@ namespace GymManagement.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        SubscriptionId = c.Int(nullable: false),
+                        SubscriptionId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -117,7 +117,7 @@ namespace GymManagement.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Subscriptions", t => t.SubscriptionId, cascadeDelete: true)
+                .ForeignKey("dbo.Subscriptions", t => t.SubscriptionId)
                 .Index(t => t.SubscriptionId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
@@ -181,11 +181,11 @@ namespace GymManagement.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         StartDate = c.DateTime(nullable: false),
                         Validity = c.Time(nullable: false, precision: 7),
-                        OfferId = c.Int(nullable: false),
+                        PackageId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Packages", t => t.OfferId, cascadeDelete: true)
-                .Index(t => t.OfferId);
+                .ForeignKey("dbo.Packages", t => t.PackageId, cascadeDelete: true)
+                .Index(t => t.PackageId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -204,7 +204,7 @@ namespace GymManagement.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Schedulers", "RoomId", "dbo.Rooms");
             DropForeignKey("dbo.AspNetUsers", "SubscriptionId", "dbo.Subscriptions");
-            DropForeignKey("dbo.Subscriptions", "OfferId", "dbo.Packages");
+            DropForeignKey("dbo.Subscriptions", "PackageId", "dbo.Packages");
             DropForeignKey("dbo.UserSchedulers", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserSchedulers", "SchedulerId", "dbo.Schedulers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
@@ -217,7 +217,7 @@ namespace GymManagement.Migrations
             DropForeignKey("dbo.Courses", "CourseTypeId", "dbo.CourseTypes");
             DropForeignKey("dbo.Rooms", "AddressId", "dbo.Addresses");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Subscriptions", new[] { "OfferId" });
+            DropIndex("dbo.Subscriptions", new[] { "PackageId" });
             DropIndex("dbo.UserSchedulers", new[] { "User_Id" });
             DropIndex("dbo.UserSchedulers", new[] { "SchedulerId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });

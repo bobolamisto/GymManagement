@@ -22,7 +22,7 @@ namespace GymManagement.Models
         //cursurile la care userul este antrenor
         public virtual System.Collections.Generic.ICollection<UserCourse> Courses { get; set; }
 
-        public int SubscriptionId { get; set; }
+        public int? SubscriptionId { get; set; }
         public virtual Subscription Subscription { get; set; }
 
         //planificari ale cursurilor la care participa userul
