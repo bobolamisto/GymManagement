@@ -123,8 +123,8 @@ namespace GymManagement.Migrations
             var users = new User[]
             {
                 //Parola: Test1.
-                new User{ Id = "10f6ac4a-366d-4edb-8f7c-9b7027888d9b", Email = "test@yahoo.com", UserName = "test@yahoo.com", FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1, PasswordHash = "AIQ/gFx0m3lkfrFIGQFDCFx3d23C5SjXKJHLKeAM1iwK0To0uY11BLd95kYLjkHbeg=="},
-                new User{ Id = "3b321d5f-94a9-4c51-97b8-0de9494abd4c", Email = "alttest@yahoo.com", UserName = "alttest@yahoo.com", FirstName = "Ion", LastName = "Vasilache", PhoneNumber = "0756321456", SubscriptionId = 2, PasswordHash = "AIQ/gFx0m3lkfrFIGQFDCFx3d23C5SjXKJHLKeAM1iwK0To0uY11BLd95kYLjkHbeg=="}
+                new User{ Email = "test@yahoo.com", UserName = "test@yahoo.com", FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1, PasswordHash = "AIQ/gFx0m3lkfrFIGQFDCFx3d23C5SjXKJHLKeAM1iwK0To0uY11BLd95kYLjkHbeg=="},
+                new User{ Email = "alttest@yahoo.com", UserName = "alttest@yahoo.com", FirstName = "Ion", LastName = "Vasilache", PhoneNumber = "0756321456", SubscriptionId = 2, PasswordHash = "AIQ/gFx0m3lkfrFIGQFDCFx3d23C5SjXKJHLKeAM1iwK0To0uY11BLd95kYLjkHbeg=="}
             };
             foreach (var user in users)
                 UserManager.Create(user);
