@@ -198,9 +198,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711261157513_DB.cs" />
-    <Compile Include="Migrations\201711261157513_DB.Designer.cs">
-      <DependentUpon>201711261157513_DB.cs</DependentUpon>
+    <Compile Include="Migrations\201711261630195_start.cs" />
+    <Compile Include="Migrations\201711261630195_start.Designer.cs">
+      <DependentUpon>201711261630195_start.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -290,7 +290,6 @@
     <Content Include="Views\Manage\ChangeFirstOrLastName.cshtml" />
     <Content Include="Views\Shared\_UserMenuPartial.cshtml" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,8 +308,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711261157513_DB.resx">
-      <DependentUpon>201711261157513_DB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711261630195_start.resx">
+      <DependentUpon>201711261630195_start.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
