@@ -274,8 +274,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Manage\ChangeFirstOrLastName.cshtml" />
     <Content Include="Views\Shared\_UserMenuPartial.cshtml" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

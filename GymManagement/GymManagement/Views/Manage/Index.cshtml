@@ -23,37 +23,49 @@
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@ 
-            <dt>Phone Number:</dt>
+
+        <dt>
+            FirstName:
             <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
+                @(Model.FirstName ?? "None")
+                [
+                @if (Model.FirstName != null)
                 {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
+                    @Html.ActionLink("Change firstname and lastname", "ChangeFirstOrLastName")
                 }
                 else
-                {
-                    <text>[&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")&nbsp;]</text>
+                { 
+                    @Html.ActionLink("Set firstname and lastname", "ChangeFirstOrLastName")
+
                 }
+                ]
             </dd>
-        
+
+        </dt>
+        <dt>
+            LastName:
+        <dd>
+            @(Model.LastName ?? "None")
+        </dd>
+        </dt>
+        <dt>Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                }
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                 
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+            }
+        </dd>
+
     </dl>
 </div>
