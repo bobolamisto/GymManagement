@@ -4,6 +4,7 @@ namespace GymManagement.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -120,48 +121,56 @@ namespace GymManagement.Migrations
             context.SaveChanges();
 
             var UserManager = new UserManager<User>(new UserStore<User>(context));
+            List<string> ids = new List<string>();
+            for (int i = 0; i <= 10; i++)
+                ids.Add(Guid.NewGuid().ToString());
             var users = new User[]
             {
-                //Parola: Test1.
-                new User{ Email = "test@yahoo.com", UserName = "test@yahoo.com", FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1, PasswordHash = "AIQ/gFx0m3lkfrFIGQFDCFx3d23C5SjXKJHLKeAM1iwK0To0uY11BLd95kYLjkHbeg=="},
-                new User{ Email = "alttest@yahoo.com", UserName = "alttest@yahoo.com", FirstName = "Ion", LastName = "Vasilache", PhoneNumber = "0756321456", SubscriptionId = 2, PasswordHash = "AIQ/gFx0m3lkfrFIGQFDCFx3d23C5SjXKJHLKeAM1iwK0To0uY11BLd95kYLjkHbeg=="}
+                new User{ Id = ids[0],Email = "test@yahoo.com", UserName = "test@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[1],Email = "alina@yahoo.com", UserName = "alina@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Alina", LastName = "Toader", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[2],Email = "raluca@yahoo.com", UserName = "raluca@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Raluca", LastName = "Manea", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[3],Email = "bogdan@yahoo.com", UserName = "bogdan@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Bogdan", LastName = "Vorobet", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[4],Email = "andreiv@yahoo.com", UserName = "andreiv@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Andrei", LastName = "Vlad", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[5],Email = "daniel@yahoo.com", UserName = "daniel@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Daniel", LastName = "Neamtu", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[6],Email = "claudiu@yahoo.com", UserName = "claudiu@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Claudiu", LastName = "Ursuta", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[7],Email = "andreic@yahoo.com", UserName = "andreic@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Andrei", LastName = "Caleniuc", PhoneNumber = "0756321456", SubscriptionId = 1},
             };
             foreach (var user in users)
                 UserManager.Create(user);
 
             var usercourses = new UserCourse[]
             {
-                new UserCourse{Id = 1, CourseId = 1, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 2, CourseId = 2, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 3, CourseId = 3, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 4, CourseId = 4, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 5, CourseId = 5, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 6, CourseId = 6, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 7, CourseId = 7, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 8, CourseId = 8, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 9, CourseId = 9, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 10, CourseId = 10, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 11, CourseId = 11, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 12, CourseId = 12, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 13, CourseId = 13, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 14, CourseId = 14, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 15, CourseId = 15, User = context.Users.FirstOrDefault()},
-                new UserCourse{Id = 16, CourseId = 16, User = context.Users.FirstOrDefault()},
+                new UserCourse{Id = 1, CourseId = 1, UserId = ids[0]},
+                new UserCourse{Id = 2, CourseId = 2, UserId = ids[0]},
+                new UserCourse{Id = 3, CourseId = 3, UserId = ids[0]},
+                new UserCourse{Id = 4, CourseId = 4, UserId = ids[0]},
+                new UserCourse{Id = 5, CourseId = 5, UserId = ids[0]},
+                new UserCourse{Id = 6, CourseId = 6, UserId = ids[0]},
+                new UserCourse{Id = 7, CourseId = 7, UserId = ids[0]},
+                new UserCourse{Id = 8, CourseId = 8, UserId = ids[0]},
+                new UserCourse{Id = 9, CourseId = 9, UserId = ids[0]},
+                new UserCourse{Id = 10, CourseId = 10, UserId = ids[0]},
+                new UserCourse{Id = 11, CourseId = 11, UserId = ids[0]},
+                new UserCourse{Id = 12, CourseId = 12, UserId = ids[0]},
+                new UserCourse{Id = 13, CourseId = 13, UserId = ids[0]},
+                new UserCourse{Id = 14, CourseId = 14, UserId = ids[0]},
+                new UserCourse{Id = 15, CourseId = 15, UserId = ids[0]},
+                new UserCourse{Id = 16, CourseId = 16, UserId = ids[0]},
             };
             context.UserCourses.AddOrUpdate(usercourses);
             context.SaveChanges();
 
             var userschedulers = new UserScheduler[]
             {
-                new UserScheduler{Id = 1, SchedulerId = 1, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 2, SchedulerId = 2, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 3, SchedulerId = 3, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 4, SchedulerId = 4, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 5, SchedulerId = 5, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 6, SchedulerId = 6, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 7, SchedulerId = 7, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 8, SchedulerId = 8, User = context.Users.FirstOrDefault()},
-                new UserScheduler{Id = 9, SchedulerId = 2, User = context.Users.FirstOrDefault()},
+                new UserScheduler{Id = 1, SchedulerId = 1, UserId = ids[0]},
+                new UserScheduler{Id = 2, SchedulerId = 2, UserId = ids[0]},
+                new UserScheduler{Id = 3, SchedulerId = 3, UserId = ids[0]},
+                new UserScheduler{Id = 4, SchedulerId = 4, UserId = ids[0]},
+                new UserScheduler{Id = 5, SchedulerId = 5, UserId = ids[0]},
+                new UserScheduler{Id = 6, SchedulerId = 6, UserId = ids[0]},
+                new UserScheduler{Id = 7, SchedulerId = 7, UserId = ids[0]},
+                new UserScheduler{Id = 8, SchedulerId = 8, UserId = ids[0]},
+                new UserScheduler{Id = 9, SchedulerId = 2, UserId = ids[0]},
             };
             context.UserSchedulers.AddOrUpdate(userschedulers);
             context.SaveChanges();
