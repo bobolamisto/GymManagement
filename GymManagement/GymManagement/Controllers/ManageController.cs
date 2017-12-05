@@ -111,6 +111,14 @@ namespace GymManagement.Controllers
             return View();
         }
 
+
+        //
+        // GET: /Manage/AdminPanel
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
+
         //
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
