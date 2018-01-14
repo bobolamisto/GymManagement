@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     var url = $(location).attr('href');
-    if (url.indexOf("Home/Index") >= 0)
+    //if (url.indexOf("Home/Index") >= 0)
+    if (url === "http://localhost:57960/")
     {
         $("#body-content").removeClass("container body-content wrapper");
     }
