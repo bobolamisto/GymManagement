@@ -34,11 +34,10 @@ namespace GymManagement.Controllers
                 ScheduleCourseModel[] scheduleCourseModels = new ScheduleCourseModel[7];
                 foreach (var schedule in x)
                 {
-                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                    Calendar cal = dfi.Calendar;
-                    if (cal.GetWeekOfYear(schedule.DateTime, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == cal.GetWeekOfYear(DateTime.Now, dfi.CalendarWeekRule, dfi.FirstDayOfWeek))
+                    System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
+                    CultureInfo ci = CultureInfo.CurrentCulture;
+                    if (ci.Calendar.GetWeekOfYear(schedule.DateTime, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) == ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday))
                     {
-
                         Course course = db.Courses.ToList().Where(c => c.Id == schedule.CourseId).FirstOrDefault();
                         var roomId = db.Courses.Where(c => c.Id == schedule.CourseId).Select(c => schedule.RoomId).FirstOrDefault();
                         var roomCapacity = db.Rooms.Where(r => r.Id == roomId).Select(r => r.NumberOfSeats).FirstOrDefault();
