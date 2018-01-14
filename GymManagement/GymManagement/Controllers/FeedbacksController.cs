@@ -11,116 +11,116 @@ using GymManagement.Models;
 
 namespace GymManagement.Controllers
 {
-    public class CoursesController : Controller
+    public class FeedbacksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Courses
+        // GET: Feedbacks
         public ActionResult Index()
         {
-            var courses = db.Courses.Include(c => c.CourseType);
-            return View(courses.ToList());
+            var feedbacks = db.Feedbacks.Include(f => f.Course).Include(f => f.User);
+            return View(feedbacks.ToList());
         }
 
-        // GET: Courses/Details/5
+        // GET: Feedbacks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            // CourseViewModel mymodel = new CourseViewModel();
-            //mymodel.course = db.Courses.Include(c => c.Trainers);
-            // mymodel.Students = GetStudents();
-            //return View(mymodel);
-            Course course = db.Courses.Include(c => c.Trainers).FirstOrDefault(c => c.Id == id);
-            if (course == null)
+            Feedback feedback = db.Feedbacks.Find(id);
+            if (feedback == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(feedback);
         }
 
-        // GET: Courses/Create
+        // GET: Feedbacks/Create
         public ActionResult Create()
         {
-            ViewBag.CourseTypeId = new SelectList(db.CourseTypes, "Id", "Name");
+            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: Feedbacks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CourseTypeId")] Course course)
+        public ActionResult Create([Bind(Include = "Id,Text,UserFullName,Date,UserId,CourseId")] Feedback feedback)
         {
             if (ModelState.IsValid)
             {
-                db.Courses.Add(course);
+                db.Feedbacks.Add(feedback);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CourseTypeId = new SelectList(db.CourseTypes, "Id", "Name", course.CourseTypeId);
-            return View(course);
+            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", feedback.CourseId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", feedback.UserId);
+            return View(feedback);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Feedbacks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
-            if (course == null)
+            Feedback feedback = db.Feedbacks.Find(id);
+            if (feedback == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseTypeId = new SelectList(db.CourseTypes, "Id", "Name", course.CourseTypeId);
-            return View(course);
+            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", feedback.CourseId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", feedback.UserId);
+            return View(feedback);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Feedbacks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CourseTypeId")] Course course)
+        public ActionResult Edit([Bind(Include = "Id,Text,UserFullName,Date,UserId,CourseId")] Feedback feedback)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(course).State = EntityState.Modified;
+                db.Entry(feedback).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CourseTypeId = new SelectList(db.CourseTypes, "Id", "Name", course.CourseTypeId);
-            return View(course);
+            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", feedback.CourseId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", feedback.UserId);
+            return View(feedback);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Feedbacks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
-            if (course == null)
+            Feedback feedback = db.Feedbacks.Find(id);
+            if (feedback == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(feedback);
         }
 
-        // POST: Courses/Delete/5
+        // POST: Feedbacks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
+            Feedback feedback = db.Feedbacks.Find(id);
+            db.Feedbacks.Remove(feedback);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -132,17 +132,6 @@ namespace GymManagement.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        [HttpPost]
-        public ActionResult AddFeedbackToCourse(AddFeedBackModel model)
-        {
-            var customer = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name).FullName;
-            var feedback = new Feedback { Text = model.Text, Date = DateTime.Now, UserFullName = customer, CourseId = model.CourseId };
-            db.Feedbacks.Add(feedback);
-            db.SaveChanges();
-            //return RedirectToAction("TrainerDetails", new { id = model.TrainerId });
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
