@@ -124,6 +124,8 @@ namespace GymManagement.Migrations
             List<string> ids = new List<string>();
             for (int i = 0; i <= 10; i++)
                 ids.Add(Guid.NewGuid().ToString());
+            //ids.Add("b909110d-3ee1-408b-954c-cba2d44261e6");
+            //ids.Add("86bfbd31-283a-4de1-bbdc-df9abb4cd9d9");
             var users = new User[]
             {
                 new User{ Id = ids[0],Email = "test@yahoo.com", UserName = "test@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1},

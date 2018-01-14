@@ -32,5 +32,6 @@ namespace GymManagement.Models
 
         //datele in care se tine cursul
         public virtual ICollection<Scheduler> Schedulers { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }
