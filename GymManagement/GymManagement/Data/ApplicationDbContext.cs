@@ -1,4 +1,6 @@
-﻿using GymManagement.Models;
+﻿
+
+using GymManagement.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -24,11 +26,12 @@ namespace GymManagement.Data
         public DbSet<Scheduler> Schedulers { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
         public DbSet<UserScheduler> UserSchedulers { get; set; }
-             
+        public DbSet<Feedback> Feedbacks { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-        
+
     }
 }

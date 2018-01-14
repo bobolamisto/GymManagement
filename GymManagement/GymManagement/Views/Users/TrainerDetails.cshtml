@@ -8,7 +8,7 @@
     <h4>Trainer</h4>
     <hr />
     <dl class="dl-horizontal">
-       
+
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -33,7 +33,7 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
@@ -41,12 +41,84 @@
         <dd>
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        
-        <!--Aici vom avea si review-urile-->
-        <!--Aici avem optiune de adaugare review-->
 
+        <dt>
+            Feedback
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        Text
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Feedbacks)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserFullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                        <td>
+                            @item.Date.ToString()
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td>
+                        <i>You</i>
+                    </td>
+                    <td>
+                        <form action="#" id="feedbackForm">
+                            <textarea cols="80" rows="3" placeholder="Your feedback here..." id="feedback" required></textarea>
+                            <input type="submit" value="Send" style="height:65px" />
+                        </form>
+                    </td>
+                    <td>
+                        <i>@DateTime.Now</i>
+                    </td>
+                </tr>
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index", "Courses")
 </p>
+
+<script type="text/javascript">
+    $("#feedbackForm").submit(function (event) {
+        event.preventDefault();
+        var text = $("#feedback").val();
+        var model = { TrainerId: "@Model.Id", Text: text };
+        $.ajax({
+            url: "/Users/AddFeedbackToTrainer",
+            type: 'Post',
+            data: JSON.stringify(model),
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            success: function (data) {
+                @*window.location.href = "/Users/TrainerDetails/" + "@Model.Id";
+                $("#feedback").val("");*@
+                //alert("succes");
+            },
+            fail: function (data) {
+                //alert("fail");
+            }
+        });
+        window.location.href = "/Users/TrainerDetails/" + "@Model.Id";
+        $("#feedback").val("");
+    });
+</script>
