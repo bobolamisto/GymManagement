@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserCoursesController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UserSchedulerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
@@ -213,6 +214,10 @@
     <Compile Include="Migrations\201711261633585_DB.cs" />
     <Compile Include="Migrations\201711261633585_DB.Designer.cs">
       <DependentUpon>201711261633585_DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801141010424_start.cs" />
+    <Compile Include="Migrations\201801141010424_start.Designer.cs">
+      <DependentUpon>201801141010424_start.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -318,6 +323,11 @@
     <Content Include="Views\UserCourses\Edit.cshtml" />
     <Content Include="Views\UserCourses\Index.cshtml" />
     <Content Include="Views\Manage\AdminPanel.cshtml" />
+    <Content Include="Views\Schedule\Create.cshtml" />
+    <Content Include="Views\Schedule\Delete.cshtml" />
+    <Content Include="Views\Schedule\Details.cshtml" />
+    <Content Include="Views\Schedule\Edit.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -338,6 +348,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711261633585_DB.resx">
       <DependentUpon>201711261633585_DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801141010424_start.resx">
+      <DependentUpon>201801141010424_start.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
