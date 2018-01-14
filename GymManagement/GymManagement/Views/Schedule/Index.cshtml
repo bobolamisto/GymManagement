@@ -11,25 +11,25 @@
 
         </th>
         <th>
-            Luni
+            Monday
         </th>
         <th>
-            Marti
+            Tuesday
         </th>
         <th>
-            Miercuri
+            Wednesday
         </th>
         <th>
-            Joi
+            Thursday
         </th>
         <th>
-            Vineri
+            Friday
         </th>
         <th>
-            Sambata
+            Saturday
         </th>
         <th>
-            Duminica
+            Sunday
         </th>
     </tr>
     @foreach (var item in Model)
@@ -46,11 +46,11 @@
                     {
                         if (course.IsAvailable)
                         {
-                            <input type="submit" class="btn-primary" name="@course.schedulerId" value="@course.courseName" />
+                            <input type="submit" class="btn-primary" name="@course.schedulerId" value="@course.courseName" title="Click to join!" />
                         }
                         else
                         {
-                            <input disabled type="submit" class="btn-primary" style="background-color:darkgrey" value="@course.courseName" />
+                            <input disabled type="submit" class="btn-primary" style="background-color:darkgrey" value="@course.courseName" title="No availability!" />
                         }
                     }
 
