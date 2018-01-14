@@ -1,4 +1,4 @@
-﻿@model GymManagement.Models.UserCourse
+﻿@model GymManagement.Models.UserScheduler
 
 @{
     ViewBag.Title = "Details";
@@ -7,19 +7,19 @@
 <h2>Details</h2>
 
 <div>
-    
+    <h4>UserScheduler</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Course name  
+            @Html.DisplayNameFor(model => model.Scheduler.Id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Course.Name)
+            @Html.DisplayFor(model => model.Scheduler.Id)
         </dd>
 
         <dt>
-            Trainer name
+            @Html.DisplayNameFor(model => model.User.FirstName)
         </dt>
 
         <dd>

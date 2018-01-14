@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GymManagement.Models.ScheduleTable>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Monday
+        </th>
+        <th>
+            Tuesday
+        </th>
+        <th>
+            Wednesday
+        </th>
+        <th>
+            Thursday
+        </th>
+        <th>
+            Friday
+        </th>
+        <th>
+            Saturday
+        </th>
+        <th>
+            Sunday
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            @foreach (var course in item.scheduleCourseModels)
+            {
+                <td>
+
+                    @if (course != null)
+                    {
+                        if (course.IsAvailable)
+                        {
+                            <input type="submit" class="btn-primary" name="@course.schedulerId" value="@course.courseName" title="Click to join!" />
+                        }
+                        else
+                        {
+                            <input disabled type="submit" class="btn-primary" style="background-color:darkgrey" value="@course.courseName" title="No availability!" />
+                        }
+                    }
+
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+
+<script>
+    $(".btn-primary").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Html.Raw(Url.Action("Create","Schedule"))" ,
+            data: {
+                schedulerId: $(this).attr("name")
+            }
+        }).done(function () {
+            window.location = "@Html.Raw(Url.Action("Index","Schedule"))";
+            alert("Inscrierea a avut loc cu success");
+        })
+    })
+</script>

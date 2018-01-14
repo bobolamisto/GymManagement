@@ -3,7 +3,7 @@ namespace GymManagement.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class DB : DbMigration
+    public partial class db : DbMigration
     {
         public override void Up()
         {
@@ -38,7 +38,6 @@ namespace GymManagement.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         DateTime = c.DateTime(nullable: false),
-                        Duration = c.Time(nullable: false, precision: 7),
                         CourseId = c.Int(nullable: false),
                         RoomId = c.Int(nullable: false),
                     })
@@ -54,6 +53,7 @@ namespace GymManagement.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Dificulty = c.Int(nullable: false),
                         CourseTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -83,15 +83,18 @@ namespace GymManagement.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.UserCourses",
+                "dbo.Feedbacks",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Text = c.String(),
+                        UserFullName = c.String(),
+                        Date = c.DateTime(nullable: false),
                         UserId = c.String(maxLength: 128),
-                        CourseId = c.Int(nullable: false),
+                        CourseId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
+                .ForeignKey("dbo.Courses", t => t.CourseId)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.CourseId);
@@ -133,6 +136,20 @@ namespace GymManagement.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.UserCourses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        CourseId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.CourseId);
             
             CreateTable(
                 "dbo.AspNetUserLogins",
@@ -179,7 +196,7 @@ namespace GymManagement.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         StartDate = c.DateTime(nullable: false),
-                        Validity = c.Time(nullable: false, precision: 7),
+                        Validity = c.Int(nullable: false),
                         PackageId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -202,16 +219,18 @@ namespace GymManagement.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Schedulers", "RoomId", "dbo.Rooms");
+            DropForeignKey("dbo.Schedulers", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.AspNetUsers", "SubscriptionId", "dbo.Subscriptions");
             DropForeignKey("dbo.Subscriptions", "PackageId", "dbo.Packages");
             DropForeignKey("dbo.UserSchedulers", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserSchedulers", "SchedulerId", "dbo.Schedulers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Feedbacks", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserCourses", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserCourses", "CourseId", "dbo.Courses");
-            DropForeignKey("dbo.Schedulers", "CourseId", "dbo.Courses");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Feedbacks", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.CourseTypes", "PackageId", "dbo.Packages");
             DropForeignKey("dbo.Courses", "CourseTypeId", "dbo.CourseTypes");
             DropForeignKey("dbo.Rooms", "AddressId", "dbo.Addresses");
@@ -222,11 +241,13 @@ namespace GymManagement.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.UserCourses", new[] { "CourseId" });
+            DropIndex("dbo.UserCourses", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUsers", new[] { "SubscriptionId" });
-            DropIndex("dbo.UserCourses", new[] { "CourseId" });
-            DropIndex("dbo.UserCourses", new[] { "UserId" });
+            DropIndex("dbo.Feedbacks", new[] { "CourseId" });
+            DropIndex("dbo.Feedbacks", new[] { "UserId" });
             DropIndex("dbo.CourseTypes", new[] { "PackageId" });
             DropIndex("dbo.Courses", new[] { "CourseTypeId" });
             DropIndex("dbo.Schedulers", new[] { "RoomId" });
@@ -237,9 +258,10 @@ namespace GymManagement.Migrations
             DropTable("dbo.UserSchedulers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.UserCourses");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.UserCourses");
+            DropTable("dbo.Feedbacks");
             DropTable("dbo.Packages");
             DropTable("dbo.CourseTypes");
             DropTable("dbo.Courses");
