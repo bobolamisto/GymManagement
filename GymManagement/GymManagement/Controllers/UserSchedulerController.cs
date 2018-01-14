@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using GymManagement.Data;
 using GymManagement.Models;
@@ -14,53 +14,78 @@ namespace GymManagement.Controllers
 {
     public class UserSchedulerController : Controller
     {
+
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private int GetWeekOfYear(DateTime time)
+        {
+            DateTime d = DateTime.Now;
+            CultureInfo cul = CultureInfo.CurrentCulture;
+            return cul.Calendar.GetWeekOfYear(
+                d,
+                CalendarWeekRule.FirstDay,
+                DayOfWeek.Monday);
+        }
+
+        private bool AreFallingInSameWeek(DateTime d1, DateTime d2)
+        {
+            if (GetWeekOfYear(d1) == GetWeekOfYear(d2))
+            {
+                return true;
+            }
+            return false;
+        }
 
         public List<ScheduleTable> Courses()
         {
+            List<ScheduleTable> scheduleTable = new List<ScheduleTable>();
             var x = db.UserSchedulers.Include(u => u.Scheduler).Include(u => u.User).ToList();
             var userSchedulers = x.Where(u => User.Identity.GetUserId() == u.User.Id).ToList();
-            List<ScheduleTable> scheduleTable = new List<ScheduleTable>();
-            for (var i = 8; i <= 18; i+=2)
+            for (var i = 8; i <= 18; i += 2)
             {
-                String courseHours = (i).ToString() + " - " + (i+2).ToString();
+                String courseHours = (i).ToString() + " - " + (i + 2).ToString();
                 String[] courseName = new String[7];
                 foreach (var schedule in userSchedulers)
                 {
                     Course course = db.Courses.ToList().Where(c => c.Id == schedule.Scheduler.CourseId).FirstOrDefault();
-                    
-                        if (schedule.Scheduler.DateTime.Hour >= i && schedule.Scheduler.DateTime.Hour < i+2){
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Monday"))
-                            {
-                                courseName[0] = course.Name;
-                            }
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Tuesday"))
-                            {
-                                courseName[1] = course.Name;
-                            }
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Wednesday"))
-                            {
-                                courseName[2] = course.Name;
-                            }
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Thursday"))
-                            {
-                                courseName[3] = course.Name;
-                            }
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Friday"))
-                            {
-                                courseName[4] = course.Name;
-                            }
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Saturday"))
-                            {
-                                courseName[5] = course.Name;
-                            }
-                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Sunday"))
-                            {
-                                courseName[6] = course.Name;
-                            }
+
+                    if (schedule.Scheduler.DateTime.Hour >= i && schedule.Scheduler.DateTime.Hour < i + 2)
+                    {
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Monday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[0] = course.Name + " (" + course.Dificulty.ToString() + ")";
                         }
-                    
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Tuesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[1] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                        }
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Wednesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[2] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                        }
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Thursday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[3] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                        }
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Friday")
+                        && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[4] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                        }
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Saturday") &&
+                        AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[5] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                        }
+                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Sunday") &&
+                        AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                        {
+                            courseName[6] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                        }
+                    }
+
                 }
+
                 scheduleTable.Add(new ScheduleTable(courseHours, courseName));
 
             }
