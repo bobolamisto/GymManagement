@@ -29,7 +29,7 @@ namespace GymManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = db.Users.Include(u => u.Feedbacks).FirstOrDefault(u => u.Id == id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -128,6 +128,17 @@ namespace GymManagement.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult AddFeedbackToTrainer(AddFeedBackModel model)
+        {
+            var customer = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name).FullName;
+            var feedback = new Feedback { Text = model.Text, Date = DateTime.Now, UserFullName = customer, UserId = model.TrainerId };
+            db.Feedbacks.Add(feedback);
+            db.SaveChanges();
+            //return RedirectToAction("TrainerDetails", new { id = model.TrainerId });
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace GymManagement.Models
                 return FirstName + " " + LastName;
             }
         }
+        
         //cursurile la care userul este antrenor
         public virtual System.Collections.Generic.ICollection<UserCourse> Courses { get; set; }
 
@@ -27,6 +28,7 @@ namespace GymManagement.Models
 
         //planificari ale cursurilor la care participa userul
         public virtual ICollection<UserScheduler> Schedulers { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

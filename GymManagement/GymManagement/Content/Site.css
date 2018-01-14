@@ -50,6 +50,6 @@ textarea {
 }
 
 .carousel-inner .item{
-    height: 65vh;
+    /*//height: 60%;*/
     object-fit: cover;
 }
