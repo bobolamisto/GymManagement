@@ -24,6 +24,7 @@ namespace GymManagement.Models
         public virtual System.Collections.Generic.ICollection<UserCourse> Courses { get; set; }
 
         public int? SubscriptionId { get; set; }
+        public bool IsAdmin { get; set; }
         public virtual Subscription Subscription { get; set; }
 
         //planificari ale cursurilor la care participa userul
@@ -34,6 +35,7 @@ namespace GymManagement.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("IsAdmin", this.IsAdmin.ToString()));
             return userIdentity;
         }
     }
