@@ -208,6 +208,7 @@
     <Compile Include="Controllers\UserSchedulerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Extentions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +216,9 @@
     <Compile Include="Migrations\201711261633585_DB.Designer.cs">
       <DependentUpon>201711261633585_DB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801141351108_adminupdate.cs" />
+    <Compile Include="Migrations\201801141351108_adminupdate.Designer.cs">
+      <DependentUpon>201801141351108_adminupdate.cs</DependentUpon>
     <Compile Include="Migrations\201801141010424_start.cs" />
     <Compile Include="Migrations\201801141010424_start.Designer.cs">
       <DependentUpon>201801141010424_start.cs</DependentUpon>
@@ -349,6 +353,8 @@
     <EmbeddedResource Include="Migrations\201711261633585_DB.resx">
       <DependentUpon>201711261633585_DB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801141351108_adminupdate.resx">
+      <DependentUpon>201801141351108_adminupdate.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\201801141010424_start.resx">
       <DependentUpon>201801141010424_start.cs</DependentUpon>
     </EmbeddedResource>
