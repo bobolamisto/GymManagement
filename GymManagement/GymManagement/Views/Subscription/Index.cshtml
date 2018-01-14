@@ -1,0 +1,38 @@
+﻿@model GymManagement.Models.Subscription
+
+@{
+    ViewBag.Title = "Subscription";
+}
+
+<h2>Subscription</h2>
+@if (ViewBag.UserLoggedIn == false)
+{
+    @Html.Display("You must be logged in to manage your subscriptions.");
+}
+else
+{
+    if (ViewBag.HasSubscription)
+    {
+        <p>@Html.LabelFor(model => model.Package.Name)</p>
+        <p>@Html.DisplayFor(model => model.Package.Name)</p>
+        <br/>
+
+        <p>@Html.LabelFor(model => model.Package.Price)</p>
+        <p>@Html.DisplayFor(model => model.Package.Price)</p>
+        <br/>
+
+        <p>@Html.LabelFor(model => model.StartDate)</p>
+        <p>@Html.DisplayFor(model => model.StartDate.Date)</p>
+        <br/>
+
+        <p>Last day of current subscription</p>
+        <p>@ViewBag.SubscriptionLastDay</p>
+    }
+    else
+    {
+        <p>Pretty empty here. Come and get a subscription.</p>
+    }
+}
+<button>
+    @Html.ActionLink("Create New", "Create")
+</button>
