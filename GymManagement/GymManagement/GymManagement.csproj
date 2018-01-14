@@ -201,7 +201,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
-    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserCoursesController.cs" />
@@ -209,26 +208,13 @@
     <Compile Include="Controllers\UserSchedulerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Extentions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711261633585_DB.cs" />
-    <Compile Include="Migrations\201711261633585_DB.Designer.cs">
-      <DependentUpon>201711261633585_DB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801141010424_start.cs" />
-    <Compile Include="Migrations\201801141010424_start.Designer.cs">
-      <DependentUpon>201801141010424_start.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801141644127_feedback.cs" />
-    <Compile Include="Migrations\201801141644127_feedback.Designer.cs">
-      <DependentUpon>201801141644127_feedback.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AddFeedBackModel.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\ScheduleTable.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseType.cs" />
@@ -271,7 +257,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -335,11 +323,6 @@
     <Content Include="Views\Schedule\Details.cshtml" />
     <Content Include="Views\Schedule\Edit.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
-    <Content Include="Views\Feedbacks\Create.cshtml" />
-    <Content Include="Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Views\Feedbacks\Details.cshtml" />
-    <Content Include="Views\Feedbacks\Edit.cshtml" />
-    <Content Include="Views\Feedbacks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -356,17 +339,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711261633585_DB.resx">
-      <DependentUpon>201711261633585_DB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801141010424_start.resx">
-      <DependentUpon>201801141010424_start.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801141644127_feedback.resx">
-      <DependentUpon>201801141644127_feedback.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
