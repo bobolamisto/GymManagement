@@ -71,7 +71,7 @@ namespace GymManagement.Controllers
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Wednesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            userScheduleModels[3] = new UserScheduleModel
+                            userScheduleModels[2] = new UserScheduleModel
                             {
                                 courseId = course.Id,
                                 userScheduleId = schedule.Id,
@@ -80,7 +80,7 @@ namespace GymManagement.Controllers
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Thursday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            userScheduleModels[4] = new UserScheduleModel
+                            userScheduleModels[3] = new UserScheduleModel
                             {
                                 courseId = course.Id,
                                 userScheduleId = schedule.Id,
@@ -90,7 +90,7 @@ namespace GymManagement.Controllers
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Friday")
                         && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            userScheduleModels[5] = new UserScheduleModel
+                            userScheduleModels[4] = new UserScheduleModel
                             {
                                 courseId = course.Id,
                                 userScheduleId = schedule.Id,
@@ -100,7 +100,7 @@ namespace GymManagement.Controllers
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Saturday") &&
                         AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            userScheduleModels[6] = new UserScheduleModel
+                            userScheduleModels[5] = new UserScheduleModel
                             {
                                 courseId = course.Id,
                                 userScheduleId = schedule.Id,
@@ -110,7 +110,7 @@ namespace GymManagement.Controllers
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Sunday") &&
                         AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            userScheduleModels[7] = new UserScheduleModel
+                            userScheduleModels[6] = new UserScheduleModel
                             {
                                 courseId = course.Id,
                                 userScheduleId = schedule.Id,

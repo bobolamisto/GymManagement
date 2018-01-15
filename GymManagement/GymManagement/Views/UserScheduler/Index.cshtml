@@ -36,7 +36,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.Time)
             </td>
             @foreach (var course in item.userScheduleModels)
@@ -44,8 +44,33 @@
                 <td>
                     @if (course != null)
                     {
-                        <input type="submit" class="btn-primary" name="@course.userScheduleId" value="@course.courseName" title="Click to unjoin!" />
+                        var diez = "#";
+                        var modalId = "confirmationModal" + @course.userScheduleId;
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=@diez@modalId title="Click to unjoin!">
+                            @course.courseName
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id=@modalId tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Unjoin @course.courseName?</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="alert-area"></div>
+                                        <div>Are you sure you want to unjoin this course?</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary unjoin-course" name="@course.userScheduleId">Unjoin</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
+
                 </td>
             }
         </tr>
@@ -57,7 +82,12 @@
 </table>
 
 <script>
-    $(".btn-primary").click(function () {
+    function newAlert(type, message) {
+        $("#alert-area").append($("<div class='alert alert-" + type + " fade in' data-alert><p> " + message + " </p></div>"));
+        $(".alert").delay(2000).fadeOut("slow", function () { $(this).remove(); });
+    }
+
+    $(".unjoin-course").click(function () {
 
         $.ajax({
             type: "POST",
@@ -66,8 +96,10 @@
                 userScheduleId: $(this).attr("name")
             }
         }).done(function () {
-            window.location = "@Html.Raw(Url.Action("Index","UserScheduler"))";
-            alert("You unjoined successfully!");
+            newAlert('success', 'You unjoined successfully!');
+            setTimeout(function () {
+                window.location = "@Html.Raw(Url.Action("Index","UserScheduler"))";
+            }, 2000);
         })
     })
 </script>
