@@ -9,7 +9,7 @@
 <table class="table">
     <tr>
         <th>
-            
+
         </th>
         <th>
             Luni
@@ -39,10 +39,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Time)
             </td>
-            @foreach (var course in item.coursesName)
+            @foreach (var course in item.userScheduleModels)
             {
                 <td>
-                    @Html.DisplayFor(modelItem => course)
+                    @if (course != null)
+                    {
+                        <input type="submit" class="btn-primary" name="@course.userScheduleId" value="@course.courseName" title="Click to unjoin!" />
+                    }
                 </td>
             }
         </tr>
@@ -52,3 +55,19 @@
 
 
 </table>
+
+<script>
+    $(".btn-primary").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Html.Raw(Url.Action("Delete","UserScheduler"))" ,
+            data: {
+                userScheduleId: $(this).attr("name")
+            }
+        }).done(function () {
+            window.location = "@Html.Raw(Url.Action("Index","UserScheduler"))";
+            alert("You unjoined successfully!");
+        })
+    })
+</script>
