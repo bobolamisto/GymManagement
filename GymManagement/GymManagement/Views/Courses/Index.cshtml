@@ -3,9 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2>Courses</h2>
 
-<h2>Index</h2>
+@using (Html.BeginForm("UpdateCourses"))
+{
+    <div class="col-md-10">
+        @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDificulty)), Model.FirstOrDefault(x => 1 == 1).Dificulty),
+                 new { onchange = "this.form.submit();" });
 
+    </div>
+}
+
+<div style="height: 30px"></div>
 <table class="table">
     <tr>
         <th>
@@ -17,18 +26,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>        
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
-        </td>
-    </tr>
-}
 
+    <div>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </div>
 </table>

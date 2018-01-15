@@ -18,9 +18,31 @@ namespace GymManagement.Controllers
         // GET: Courses
         public ActionResult Index()
         {
+
             var courses = db.Courses.Include(c => c.CourseType);
+
+            var dificulty = Request.Form["CourseDificulty"];
+            CourseDificulty selectedDificulty;
+            if (dificulty != null)
+            {
+                if (dificulty == "Easy")
+                {
+                    selectedDificulty = CourseDificulty.Easy;
+                }
+                else if (dificulty == "Medium")
+                {
+                    selectedDificulty = CourseDificulty.Medium;
+                }
+                else
+                {
+                    selectedDificulty = CourseDificulty.Hard;
+                }
+                courses = courses.Where(c => c.Dificulty == selectedDificulty);
+            }
             return View(courses.ToList());
         }
+       
+
 
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
