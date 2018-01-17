@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    var feedbacks = Model.Feedbacks.OrderBy(f=>f.Date);
 }
 
 <h2>Details</h2>
@@ -78,8 +79,7 @@
                     </th>
                     <th></th>
                 </tr>
-
-                @foreach (var item in Model.Feedbacks)
+                @foreach (var item in feedbacks)
                 {
                     <tr>
                         <td>
@@ -137,7 +137,8 @@
                 //alert("fail");
             }
         });
-        window.location.href = "/Courses/Details/" + "@Model.Id";
         $("#feedback").val("");
+        window.location.href = "/Courses/Details/" + "@Model.Id";
+
     });
 </script>

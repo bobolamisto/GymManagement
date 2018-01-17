@@ -9,12 +9,13 @@
 @using (Html.BeginForm("UpdateScheduleTable"))
 {
     <div class="col-md-10">
+        @Html.Label("Filter courses by their difficulty  ")
         @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDifficulty)), ViewData["selectedDifficulty"]),
                  new { onchange = "this.form.submit();" })
 
     </div>
 }
-
+<br />
 <table class="table">
     <tr>
         <th>

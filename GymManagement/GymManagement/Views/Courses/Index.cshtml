@@ -8,12 +8,12 @@
 @using (Html.BeginForm("UpdateCourses"))
 {
     <div class="col-md-10">
-        @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDifficulty)), ViewData["selectedDifficulty"]),
-                 new { onchange = "this.form.submit();" })
-
+        @Html.Label( "Filter courses by their difficulty  ")
+       @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDifficulty)), ViewData["selectedDifficulty"]),
+                  new { onchange = "this.form.submit();" })
     </div>
 }
-
+<br>
 <div style="height: 30px"></div>
 <table class="table">
     <tr>

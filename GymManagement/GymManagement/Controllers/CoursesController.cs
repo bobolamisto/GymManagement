@@ -25,7 +25,7 @@ namespace GymManagement.Controllers
             CourseDifficulty selectedDificulty;
             if (dificulty != null && dificulty != "All")
             {
-                selectedDificulty = (CourseDifficulty) Enum.Parse(typeof(CourseDifficulty), dificulty);
+                selectedDificulty = (CourseDifficulty)Enum.Parse(typeof(CourseDifficulty), dificulty);
                 ViewData["selectedDifficulty"] = selectedDificulty;
                 courses = courses.Where(c => c.Dificulty == selectedDificulty);
             }
@@ -35,7 +35,7 @@ namespace GymManagement.Controllers
             }
             return View(courses.ToList());
         }
-       
+
 
 
         // GET: Courses/Details/5
@@ -49,7 +49,7 @@ namespace GymManagement.Controllers
             //mymodel.course = db.Courses.Include(c => c.Trainers);
             // mymodel.Students = GetStudents();
             //return View(mymodel);
-            Course course = db.Courses.Include(c => c.Trainers).FirstOrDefault(c => c.Id == id);
+            Course course = db.Courses.Include(c => c.Trainers).Include(c => c.Feedbacks).FirstOrDefault(c => c.Id == id);
             if (course == null)
             {
                 return HttpNotFound();
