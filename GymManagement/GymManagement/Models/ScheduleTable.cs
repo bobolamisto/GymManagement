@@ -9,6 +9,7 @@ namespace GymManagement.Models
     {
         public string Time;
         public ScheduleCourseModel[] scheduleCourseModels = new ScheduleCourseModel[7];
+        public UserScheduleModel[] userScheduleModels = new UserScheduleModel[7];
         public string[] coursesName = new string[7];
 
         public ScheduleTable(string time, string[] coursesName)
@@ -22,8 +23,14 @@ namespace GymManagement.Models
             this.scheduleCourseModels = scheduleCourseModels;
         }
 
+        public ScheduleTable(string time, UserScheduleModel[] userScheduleModels)
+        {
+            Time = time;
+            this.userScheduleModels = userScheduleModels;
+        }
+
         public ScheduleTable()
-        { 
+        {
             Time = "";
             for (var i = 0; i < 7; i++)
             {
@@ -38,5 +45,12 @@ namespace GymManagement.Models
         public int schedulerId { get; set; }
         public string courseName { get; set; }
         public bool IsAvailable { get; set; }
+    }
+
+    public class UserScheduleModel
+    {
+        public int courseId { get; set; }
+        public int userScheduleId { get; set; }
+        public string courseName { get; set; }
     }
 }

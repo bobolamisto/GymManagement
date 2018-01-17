@@ -44,7 +44,7 @@ namespace GymManagement.Controllers
             for (var i = 8; i <= 18; i += 2)
             {
                 String courseHours = (i).ToString() + " - " + (i + 2).ToString();
-                String[] courseName = new String[7];
+                UserScheduleModel[] userScheduleModels = new UserScheduleModel[7];
                 foreach (var schedule in userSchedulers)
                 {
                     Course course = db.Courses.ToList().Where(c => c.Id == schedule.Scheduler.CourseId).FirstOrDefault();
@@ -53,40 +53,75 @@ namespace GymManagement.Controllers
                     {
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Monday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[0] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[0] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Tuesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[1] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[1] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Wednesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[2] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[2] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Thursday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[3] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[3] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Friday")
                         && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[4] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[4] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Saturday") &&
                         AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[5] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[5] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                         if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Sunday") &&
                         AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
                         {
-                            courseName[6] = course.Name + " (" + course.Dificulty.ToString() + ")";
+                            userScheduleModels[6] = new UserScheduleModel
+                            {
+                                courseId = course.Id,
+                                userScheduleId = schedule.Id,
+                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                            };
                         }
                     }
 
                 }
 
-                scheduleTable.Add(new ScheduleTable(courseHours, courseName));
+                scheduleTable.Add(new ScheduleTable(courseHours, userScheduleModels));
 
             }
             return scheduleTable;
@@ -95,7 +130,6 @@ namespace GymManagement.Controllers
         // GET: UserScheduler
         public ActionResult Index()
         {
-
             return View(Courses());
         }
 
@@ -193,12 +227,15 @@ namespace GymManagement.Controllers
 
         // POST: UserScheduler/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int userScheduleId)
         {
-            UserScheduler userScheduler = db.UserSchedulers.Find(id);
-            db.UserSchedulers.Remove(userScheduler);
-            db.SaveChanges();
+            var userId = User.Identity.GetUserId();
+            var userSchedule = db.UserSchedulers.Where(us => us.UserId == userId && us.Id == userScheduleId).FirstOrDefault();
+            if (userSchedule != null)
+            {
+                db.UserSchedulers.Remove(userSchedule);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
