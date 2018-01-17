@@ -140,7 +140,7 @@ namespace GymManagement.Migrations
                 ids.Add(Guid.NewGuid().ToString());
             var users = new User[]
             {
-                new User{ Id = ids[0],Email = "test@yahoo.com", UserName = "test@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1},
+                new User{ Id = ids[0],Email = "test@yahoo.com", UserName = "test@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Maria", LastName = "Popescu", PhoneNumber = "0756321456", SubscriptionId = 1, IsAdmin = true},
                 new User{ Id = ids[1],Email = "alina@yahoo.com", UserName = "alina@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Alina", LastName = "Toader", PhoneNumber = "0756321456", SubscriptionId = 1},
                 new User{ Id = ids[2],Email = "raluca@yahoo.com", UserName = "raluca@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Raluca", LastName = "Manea", PhoneNumber = "0756321456", SubscriptionId = 1},
                 new User{ Id = ids[3],Email = "bogdan@yahoo.com", UserName = "bogdan@yahoo.com", PasswordHash =  new PasswordHasher().HashPassword("Test1."),FirstName = "Bogdan", LastName = "Vorobet", PhoneNumber = "0756321456", SubscriptionId = 1},
