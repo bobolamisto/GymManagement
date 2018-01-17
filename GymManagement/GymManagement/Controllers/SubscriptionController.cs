@@ -1,6 +1,7 @@
 ﻿using GymManagement.Data;
 using GymManagement.Models;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -56,14 +57,20 @@ namespace GymManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(SubscriptionPackagesViewModel subscriptionPackages, FormCollection form)
+        public ActionResult Create(SubscriptionPackagesViewModel subscriptionPackages, FormCollection form)
         {
             var packageName = form["Package"];
             var selectedPackage = db.Packages.Single(package => package.Name.Equals(packageName));
+            var pickedDate = subscriptionPackages.Date;
+            var isDateValid = pickedDate.CompareTo(DateTime.Now) > 0;
+            if (!isDateValid)
+            {
+                pickedDate = DateTime.Now;
+            }
             var subscription = new Subscription()
             {
                 PackageId = selectedPackage.Id,
-                StartDate = subscriptionPackages.Date,
+                StartDate = pickedDate,
                 Validity = 30
             };
 

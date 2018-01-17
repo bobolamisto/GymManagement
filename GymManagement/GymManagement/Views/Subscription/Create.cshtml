@@ -4,14 +4,34 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2 class="text-center">Take a look at our offer</h2>
+<br /><br />
+
+@foreach(var package in Model.Packages)
+{
+    <div class="text-center"><strong>@package.Name</strong></div>
+    <list>
+        @foreach (var courseType in package.CourseTypes)
+        {
+            <li class="text-center">
+                @courseType.Name with Courses:
+                @foreach (var course in courseType.Courses)
+                {
+                    <span>@course.Name</span>
+                }
+            </li>
+        }
+    </list>
+    <br />
+}
+
+<h2 class="text-center">Buy your subscription</h2>
+<br/>
 
 @using (Html.BeginForm())
 {
     <fieldset>
-        <legend>Subscription</legend>
-
-        <div class="editor-label">
+        <div class="text-center">
             @Html.LabelFor(model => model.Subscription.Package)
             <select id="Package" name="Package">
                 @foreach (var package in Model.Packages)
@@ -19,66 +39,24 @@
                     <option>@package.Name</option>
                 }
             </select>
-            @*@Html.DropDownListFor(option => option.Package, new SelectList(Model.Packages, ), "Select package: "));*@
         </div>
-
-        <div class="editor-label">
+        <br/>
+        <div class="text-center">
             @Html.LabelFor(model => model.Subscription.StartDate)
 
             <input type="date" id="Date" name="Date" />
+            <br /> <br />
+            <input class="text-center" type="submit" value="Buy subscription" />
         </div>
-
-        <input type="submit" value="Buy subscription"/>
-
+        <br />
     </fieldset>
 }
 
-<div>
+<div class="text-center">
     @Html.ActionLink("Back to your subscription", "Index")
 </div>
+<br />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-@*@model IEnumerable<GymManagement.Models.Package>
-
-    @{
-        ViewBag.Title = "Buy Subscription";
-    }
-
-    <h2>Buy a subscription:</h2>
-
-    <table>
-        <tr>
-            <th>Package Name</th>
-            <th>Package Price</th>
-            <th>Included Course Types</th>
-        </tr>
-        @foreach(var package in Model)
-        {
-            <tr>
-                <td>@package.Name</td>
-                <td>@package.Price</td>
-                <td>
-                    @foreach(var courseType in package.CourseTypes)
-                    {
-                        <p>@courseType.Name</p>
-                    }
-                </td>
-            </tr>
-        }
-    </table>
-
-    @using (Html.BeginForm("BuySubscription", "SubscriptionController", FormMethod.Post))
-    {
-        <select id="package">
-            @foreach (var package in Model)
-            {
-                <option value=@package.Id>@package.Name</option>
-            }
-        </select>
-        <input type="date" id="date" name="Start Date" />
-        <input type="submit" value="Get your subscription !"/>
-    }*@
-

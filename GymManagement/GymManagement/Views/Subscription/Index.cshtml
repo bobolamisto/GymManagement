@@ -5,34 +5,70 @@
 }
 
 <h2>Subscription</h2>
-@if (ViewBag.UserLoggedIn == false)
+
+@if (!ViewBag.UserLoggedIn)
 {
-    @Html.Display("You must be logged in to manage your subscriptions.");
+    <div><strong>You must be logged in to manage your subscriptions.</strong></div>
 }
 else
 {
     if (ViewBag.HasSubscription)
     {
-        <p>@Html.LabelFor(model => model.Package.Name)</p>
-        <p>@Html.DisplayFor(model => model.Package.Name)</p>
-        <br/>
+        <p><strong>You currently have acces to the following:</strong></p>
+        <table class="table">
+            <tr>
+                <th>Course Name</th>
+                <th>Course Types</th>
+            </tr>
+            @foreach (var courseType in Model.Package.CourseTypes)
+            {
+                foreach (var course in courseType.Courses)
+                {
+                    <tr>
+                        <td>@course.Name</td>
+                        <td>@courseType.Name</td>
+                    </tr>
+                }
+            }
+        </table>
+        <br /><br />
 
-        <p>@Html.LabelFor(model => model.Package.Price)</p>
-        <p>@Html.DisplayFor(model => model.Package.Price)</p>
-        <br/>
+        <p><strong>Current subscription details:</strong></p>
 
-        <p>@Html.LabelFor(model => model.StartDate)</p>
-        <p>@Html.DisplayFor(model => model.StartDate.Date)</p>
-        <br/>
+        <div>@Html.LabelFor(model => model.Package.Name): @Html.DisplayFor(model => model.Package.Name)</div>
+        <br />
 
-        <p>Last day of current subscription</p>
-        <p>@ViewBag.SubscriptionLastDay</p>
+        <div>@Html.LabelFor(model => model.Package.Price): @Html.DisplayFor(model => model.Package.Price)</div>
+        <br />
+
+        <div>@Html.LabelFor(model => model.StartDate): @Html.DisplayFor(model => model.StartDate.Date)</div>
+        <br />
+
+        <div>Last day of current subscription: @ViewBag.SubscriptionLastDay</div>
+        <br /><br />
     }
     else
     {
         <p>Pretty empty here. Come and get a subscription.</p>
     }
 }
-<button>
-    @Html.ActionLink("Create New", "Create")
-</button>
+
+@if (ViewBag.UserLoggedIn)
+{
+    if (ViewBag.HasSubscription)
+    {
+        <button>
+            @Html.ActionLink("Modify current subscription", "Create")
+        </button>
+        <div>If you want to change your subscription, just do it. We'll reimburse you for the remaining active days of the current subscription</div>
+
+    }
+    else
+    {
+        <button>
+            @Html.ActionLink("Create New", "Create")
+        </button>
+    }
+}
+
+<br /><br />
