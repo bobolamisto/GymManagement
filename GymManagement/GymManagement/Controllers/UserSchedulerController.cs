@@ -41,6 +41,12 @@ namespace GymManagement.Controllers
             List<ScheduleTable> scheduleTable = new List<ScheduleTable>();
             var x = db.UserSchedulers.Include(u => u.Scheduler).Include(u => u.User).ToList();
             var userSchedulers = x.Where(u => User.Identity.GetUserId() == u.User.Id).ToList();
+            var dificulty = Request.Form["CourseDificulty"];
+            if (dificulty == null)
+                ViewData["selectedDifficulty"] = CourseDifficulty.All;
+            else
+                ViewData["selectedDifficulty"] = (CourseDifficulty)Enum.Parse(typeof(CourseDifficulty), dificulty);
+
             for (var i = 8; i <= 18; i += 2)
             {
                 String courseHours = (i).ToString() + " - " + (i + 2).ToString();
@@ -48,77 +54,80 @@ namespace GymManagement.Controllers
                 foreach (var schedule in userSchedulers)
                 {
                     Course course = db.Courses.ToList().Where(c => c.Id == schedule.Scheduler.CourseId).FirstOrDefault();
-
-                    if (schedule.Scheduler.DateTime.Hour >= i && schedule.Scheduler.DateTime.Hour < i + 2)
+                    if (dificulty == "All" || dificulty == null || course.Dificulty.ToString() == dificulty)
                     {
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Monday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[0] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Tuesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[1] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Wednesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[2] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Thursday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[3] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Friday")
-                        && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[4] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Saturday") &&
-                        AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[5] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                        if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Sunday") &&
-                        AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
-                        {
-                            userScheduleModels[6] = new UserScheduleModel
-                            {
-                                courseId = course.Id,
-                                userScheduleId = schedule.Id,
-                                courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
-                            };
-                        }
-                    }
 
+                        if (schedule.Scheduler.DateTime.Hour >= i && schedule.Scheduler.DateTime.Hour < i + 2)
+                        {
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Monday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[0] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Tuesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[1] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Wednesday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[2] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Thursday") && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[3] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Friday")
+                            && AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[4] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Saturday") &&
+                            AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[5] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                            if (schedule.Scheduler.DateTime.DayOfWeek.ToString().Equals("Sunday") &&
+                            AreFallingInSameWeek(schedule.Scheduler.DateTime, DateTime.Now))
+                            {
+                                userScheduleModels[6] = new UserScheduleModel
+                                {
+                                    courseId = course.Id,
+                                    userScheduleId = schedule.Id,
+                                    courseName = course.Name + " (" + course.Dificulty.ToString() + ")"
+                                };
+                            }
+                        }
+
+                    }
                 }
 
                 scheduleTable.Add(new ScheduleTable(courseHours, userScheduleModels));

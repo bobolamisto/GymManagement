@@ -6,8 +6,9 @@ using System.Web;
 
 namespace GymManagement.Models
 {
-    public enum CourseDificulty
+    public enum CourseDifficulty
     {
+        All, //only for display purposes
         Easy,
         Medium,
         Hard
@@ -20,7 +21,7 @@ namespace GymManagement.Models
 
         public string Name { get; set; }
 
-        public CourseDificulty Dificulty { get; set; }
+        public CourseDifficulty Dificulty { get; set; }
 
         //antrenorii de la curs
         public virtual ICollection<UserCourse> Trainers { get; set; }

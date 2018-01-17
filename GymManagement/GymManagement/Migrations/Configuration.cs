@@ -57,25 +57,25 @@ namespace GymManagement.Migrations
 
             var courses = new Course[]
             {
-                new Course{ Id = 1, Name = "Zumba for begginers", Dificulty = CourseDificulty.Easy, CourseTypeId = 1},
-                new Course{ Id = 2, Name = "Zumba workout", Dificulty = CourseDificulty.Medium, CourseTypeId = 1},
-                new Course{ Id = 3, Name = "Zumba for life", Dificulty = CourseDificulty.Hard, CourseTypeId = 1},
-                new Course{ Id = 2, Name = "Kangoo Jumps", Dificulty = CourseDificulty.Easy, CourseTypeId = 1},
-                new Course{ Id = 3, Name = "Aerobic", Dificulty = CourseDificulty.Easy, CourseTypeId = 1},
-                new Course{ Id = 4, Name = "Spinning", Dificulty = CourseDificulty.Easy, CourseTypeId = 2},
-                new Course{ Id = 5, Name = "Fitness", Dificulty = CourseDificulty.Easy, CourseTypeId = 2},
-                new Course{ Id = 6, Name = "Body building", Dificulty = CourseDificulty.Easy, CourseTypeId = 2},
-                new Course{ Id = 7, Name = "Cycling", Dificulty = CourseDificulty.Easy, CourseTypeId = 3},
-                new Course{ Id = 8, Name = "Yoga", Dificulty = CourseDificulty.Medium, CourseTypeId = 3},
-                new Course{ Id = 9, Name = "Core strength", Dificulty = CourseDificulty.Medium, CourseTypeId = 3},
-                new Course{ Id = 10, Name = "Tae bo", Dificulty = CourseDificulty.Medium, CourseTypeId = 4},
-                new Course{ Id = 11, Name = "Circuit training", Dificulty = CourseDificulty.Medium, CourseTypeId = 4},
-                new Course{ Id = 12, Name = "Body pump", Dificulty = CourseDificulty.Medium, CourseTypeId = 4},
-                new Course{ Id = 13, Name = "Pilates", Dificulty = CourseDificulty.Medium, CourseTypeId = 5},
-                new Course{ Id = 14, Name = "Stretching", Dificulty = CourseDificulty.Hard, CourseTypeId = 5},
-                new Course{ Id = 15, Name = "Meditation", Dificulty = CourseDificulty.Hard, CourseTypeId = 5},
-                new Course{ Id = 16, Name = "X-treme abs", Dificulty = CourseDificulty.Hard, CourseTypeId = 6},
-                new Course{ Id = 17, Name = "Functional Exercies", Dificulty = CourseDificulty.Hard, CourseTypeId = 7}
+                new Course{ Id = 1, Name = "Zumba for begginers", Dificulty = CourseDifficulty.Easy, CourseTypeId = 1},
+                new Course{ Id = 2, Name = "Zumba workout", Dificulty = CourseDifficulty.Medium, CourseTypeId = 1},
+                new Course{ Id = 3, Name = "Zumba for life", Dificulty = CourseDifficulty.Hard, CourseTypeId = 1},
+                new Course{ Id = 2, Name = "Kangoo Jumps", Dificulty = CourseDifficulty.Easy, CourseTypeId = 1},
+                new Course{ Id = 3, Name = "Aerobic", Dificulty = CourseDifficulty.Easy, CourseTypeId = 1},
+                new Course{ Id = 4, Name = "Spinning", Dificulty = CourseDifficulty.Easy, CourseTypeId = 2},
+                new Course{ Id = 5, Name = "Fitness", Dificulty = CourseDifficulty.Easy, CourseTypeId = 2},
+                new Course{ Id = 6, Name = "Body building", Dificulty = CourseDifficulty.Easy, CourseTypeId = 2},
+                new Course{ Id = 7, Name = "Cycling", Dificulty = CourseDifficulty.Easy, CourseTypeId = 3},
+                new Course{ Id = 8, Name = "Yoga", Dificulty = CourseDifficulty.Medium, CourseTypeId = 3},
+                new Course{ Id = 9, Name = "Core strength", Dificulty = CourseDifficulty.Medium, CourseTypeId = 3},
+                new Course{ Id = 10, Name = "Tae bo", Dificulty = CourseDifficulty.Medium, CourseTypeId = 4},
+                new Course{ Id = 11, Name = "Circuit training", Dificulty = CourseDifficulty.Medium, CourseTypeId = 4},
+                new Course{ Id = 12, Name = "Body pump", Dificulty = CourseDifficulty.Medium, CourseTypeId = 4},
+                new Course{ Id = 13, Name = "Pilates", Dificulty = CourseDifficulty.Medium, CourseTypeId = 5},
+                new Course{ Id = 14, Name = "Stretching", Dificulty = CourseDifficulty.Hard, CourseTypeId = 5},
+                new Course{ Id = 15, Name = "Meditation", Dificulty = CourseDifficulty.Hard, CourseTypeId = 5},
+                new Course{ Id = 16, Name = "X-treme abs", Dificulty = CourseDifficulty.Hard, CourseTypeId = 6},
+                new Course{ Id = 17, Name = "Functional Exercies", Dificulty = CourseDifficulty.Hard, CourseTypeId = 7}
             };
             context.Courses.AddOrUpdate(courses);
             context.SaveChanges();
@@ -98,16 +98,16 @@ namespace GymManagement.Migrations
 
             var schedulers = new Scheduler[]
             {
-                new Scheduler{ Id = 1, DateTime = new DateTime(2017,12,4,12,0,0), RoomId = 1, CourseId = 1},
-                new Scheduler{ Id = 2, DateTime = new DateTime(2017,12,5,14,0,0), RoomId = 1, CourseId = 2},
-                new Scheduler{ Id = 3, DateTime = new DateTime(2017,12,6,16,0,0), RoomId = 1, CourseId = 3},
-                new Scheduler{ Id = 4, DateTime = new DateTime(2017,12,7,18,0,0), RoomId = 1, CourseId = 4},
-                new Scheduler{ Id = 5, DateTime = new DateTime(2017,12,8,8,0,0), RoomId = 2, CourseId = 5},
-                new Scheduler{ Id = 6, DateTime = new DateTime(2017,12,9,10,0,0), RoomId = 1, CourseId = 6},
-                new Scheduler{ Id = 7, DateTime = new DateTime(2017,12,10,8,0,0), RoomId = 1, CourseId = 7},
-                new Scheduler{ Id = 8, DateTime = new DateTime(2017,12,4,10,0,0), RoomId = 2, CourseId = 5},
-                new Scheduler{ Id = 9, DateTime = new DateTime(2017,12,6,12,0,0), RoomId = 2, CourseId = 3},
-                new Scheduler{ Id = 10, DateTime = new DateTime(2017,12,8,14,0,0), RoomId = 2, CourseId = 1},
+                new Scheduler{ Id = 1, DateTime = new DateTime(2018,1,15,8,0,0), RoomId = 1, CourseId = 1},
+                new Scheduler{ Id = 2, DateTime = new DateTime(2018,1,15,18,0,0), RoomId = 1, CourseId = 2},
+                new Scheduler{ Id = 3, DateTime = new DateTime(2018,1,16,18,0,0), RoomId = 1, CourseId = 3},
+                new Scheduler{ Id = 4, DateTime = new DateTime(2018,1,17,10,0,0), RoomId = 1, CourseId = 4},
+                new Scheduler{ Id = 5, DateTime = new DateTime(2018,1,18,12,0,0), RoomId = 2, CourseId = 5},
+                new Scheduler{ Id = 6, DateTime = new DateTime(2018,1,19,14,0,0), RoomId = 1, CourseId = 6},
+                new Scheduler{ Id = 7, DateTime = new DateTime(2018,1,20,16,0,0), RoomId = 1, CourseId = 7},
+                new Scheduler{ Id = 8, DateTime = new DateTime(2018,1,21,18,0,0), RoomId = 2, CourseId = 5},
+                new Scheduler{ Id = 9, DateTime = new DateTime(2018,1,22,18,0,0), RoomId = 2, CourseId = 3},
+                new Scheduler{ Id = 10, DateTime = new DateTime(2018,1,14,8,0,0), RoomId = 2, CourseId = 1},
             };
             context.Schedulers.AddOrUpdate(schedulers);
             context.SaveChanges();

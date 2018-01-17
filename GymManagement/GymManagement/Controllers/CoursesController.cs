@@ -22,22 +22,16 @@ namespace GymManagement.Controllers
             var courses = db.Courses.Include(c => c.CourseType);
 
             var dificulty = Request.Form["CourseDificulty"];
-            CourseDificulty selectedDificulty;
-            if (dificulty != null)
+            CourseDifficulty selectedDificulty;
+            if (dificulty != null && dificulty != "All")
             {
-                if (dificulty == "Easy")
-                {
-                    selectedDificulty = CourseDificulty.Easy;
-                }
-                else if (dificulty == "Medium")
-                {
-                    selectedDificulty = CourseDificulty.Medium;
-                }
-                else
-                {
-                    selectedDificulty = CourseDificulty.Hard;
-                }
+                selectedDificulty = (CourseDifficulty) Enum.Parse(typeof(CourseDifficulty), dificulty);
+                ViewData["selectedDifficulty"] = selectedDificulty;
                 courses = courses.Where(c => c.Dificulty == selectedDificulty);
+            }
+            else
+            {
+                ViewData["selectedDifficulty"] = CourseDifficulty.All;
             }
             return View(courses.ToList());
         }

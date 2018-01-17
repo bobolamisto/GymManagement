@@ -5,6 +5,14 @@
 }
 
 <h2>Index</h2>
+@using (Html.BeginForm("UpdateScheduleTable"))
+{
+    <div class="col-md-10">
+        @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDifficulty)), ViewData["selectedDifficulty"]),
+                 new { onchange = "this.form.submit();" })
+
+    </div>
+}
 <table class="table">
     <tr>
         <th>
