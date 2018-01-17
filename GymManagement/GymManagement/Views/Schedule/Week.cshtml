@@ -5,12 +5,14 @@
 }
 
 <h2>All the courses</h2>
+<a id="previous-week-button" type="button" class="btn btn-secondary" href="#">Previous Week</a>
+<a id="next-week-button" type="button" class="btn btn-secondary" href="#">Next week</a>
 @using (Html.BeginForm("UpdateScheduleTable"))
 {
     <div class="col-md-10">
         @Html.Label("Filter courses by their difficulty  ")
         @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDifficulty)), ViewData["selectedDifficulty"]),
-                 new { onchange = "this.form.submit();" })
+                      new { onchange = "this.form.submit();" })
 
     </div>
 }
@@ -73,8 +75,21 @@
 </table>
 
 <script>
-    $(".btn-primary").click(function () {
+    $(document).ready(function () {
+        var path = window.location.pathname.split("/");
+        var week = path[path.length - 1];
+        if (week == "1") {
+            $("#previous-week-button").attr("disabled","");
+        }
+        if (week == 52) {
+            $("#next-week-button").attr("disabled", "");
+        }
+        $("#previous-week-button").attr("href", ("/Schedule/Week/" + (parseInt(week) - 1)))
+        $("#next-week-button").attr("href", ("/Schedule/Week/" + (parseInt(week) + 1)))
+    })
 
+    $(".btn-primary").click(function () {
+    
         $.ajax({
             type: "POST",
             url: "@Html.Raw(Url.Action("Create","Schedule"))" ,

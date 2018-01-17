@@ -11,6 +11,7 @@ namespace GymManagement.Models
         public ScheduleCourseModel[] scheduleCourseModels = new ScheduleCourseModel[7];
         public UserScheduleModel[] userScheduleModels = new UserScheduleModel[7];
         public string[] coursesName = new string[7];
+        public int Week { get; set; }
 
         public ScheduleTable(string time, string[] coursesName)
         {
