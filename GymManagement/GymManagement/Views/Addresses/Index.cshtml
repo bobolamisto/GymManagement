@@ -1,0 +1,66 @@
+﻿@model IEnumerable<GymManagement.Models.Address>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    //$(document).ready(function () {
+        var buildings = @Html.Raw(Json.Encode(@ViewData["roomsJS"]));
+        window.latitude = @Model.First().Latitude;
+        window.longitude = @Model.First().Longitude;
+        window.street =  "@Model.First().Street" + " " +  "@Model.First().StreetNumber";
+    //});
+</script>
+
+<div class="col-md-4">
+    <h2>Our Buildings</h2>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <div class="clickable" id="@item.Id" data-toggle="collapse" data-target="#demo_@item.Id"><span class="glyphicon glyphicon-search" ></span></div>
+                    <div id="demo_@item.Id" class="collapse">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Room
+                                </th>
+                                <th>
+                                    Seats
+                                </th>
+                            </tr>
+                            @foreach (var room in item.Rooms)
+                            {
+                            <tr>
+                                <td>@room.Name</td>
+                                <td>@room.NumberOfSeats</td>
+                            </tr>
+                            }
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="col-md-8">
+    <div id="map" style="height:500px; margin: 10px 0px;"></div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEImrPrDRb-12UFkgRegFVSKekIAJmh8&callback=initMap"></script>
+}
