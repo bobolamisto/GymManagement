@@ -1,4 +1,4 @@
-namespace GymManagement.Migrations
+﻿namespace GymManagement.Migrations
 {
     using GymManagement.Models;
     using Microsoft.AspNet.Identity;
@@ -82,8 +82,9 @@ namespace GymManagement.Migrations
 
             var addresses = new Address[]
             {
-                new Address{Id = 1, Street = "Abey Road", StreetNumber = 11, Latitude = 20, Longitude = 21},
-                new Address{Id = 2, Street = "New street", StreetNumber = 10, Latitude = 24, Longitude = 29},
+                new Address{Id = 1, Name = "Main Building", Street = "Mihail Kogalniceanu", StreetNumber = 1, Latitude = 46.7677898, Longitude = 23.593690700000025},
+                new Address{Id = 2, Name = "Second Building", Street = "Strada Dunării", StreetNumber = 22, Latitude = 46.77616219999999, Longitude = 23.628539100000012},
+                new Address{Id = 3, Name = "Third Building", Street = "Strada Dunării", StreetNumber = 22, Latitude = 46.7608188, Longitude = 23.579431099999965},
             };
             context.Addresses.AddOrUpdate(addresses);
             context.SaveChanges();
@@ -91,7 +92,18 @@ namespace GymManagement.Migrations
             var rooms = new Room[]
             {
                 new Room{ Id = 1, Name = "A", NumberOfSeats = 20, AddressId = 1},
-                new Room{ Id = 2, Name = "B", NumberOfSeats = 21, AddressId = 2}
+                new Room{ Id = 2, Name = "B", NumberOfSeats = 21, AddressId = 1},
+                new Room{ Id = 3, Name = "C", NumberOfSeats = 11, AddressId = 1},
+                new Room{ Id = 4, Name = "D", NumberOfSeats = 9, AddressId = 1},
+
+                new Room{ Id = 5, Name = "E", NumberOfSeats = 200, AddressId = 2},
+                new Room{ Id = 6, Name = "F", NumberOfSeats = 5, AddressId = 2},
+                new Room{ Id = 7, Name = "G", NumberOfSeats = 10, AddressId = 2},
+
+                new Room{ Id = 8, Name = "H", NumberOfSeats = 34, AddressId = 3},
+                new Room{ Id = 9, Name = "I", NumberOfSeats = 11, AddressId = 3},
+                new Room{ Id = 10, Name = "J", NumberOfSeats = 5, AddressId = 3},
+
             };
             context.Rooms.AddOrUpdate(rooms);
             context.SaveChanges();
@@ -101,27 +113,27 @@ namespace GymManagement.Migrations
                 new Scheduler{ Id = 1, DateTime = new DateTime(2018,1,15,8,0,0), RoomId = 1, CourseId = 1},
                 new Scheduler{ Id = 2, DateTime = new DateTime(2018,1,15,12,0,0), RoomId = 2, CourseId = 1},
 
-                new Scheduler{ Id = 3, DateTime = new DateTime(2018,1,15,18,0,0), RoomId = 1, CourseId = 2},
-                new Scheduler{ Id = 4, DateTime = new DateTime(2018,1,15,16,0,0), RoomId = 1, CourseId = 2},
+                new Scheduler{ Id = 3, DateTime = new DateTime(2018,1,15,18,0,0), RoomId = 3, CourseId = 2},
+                new Scheduler{ Id = 4, DateTime = new DateTime(2018,1,15,16,0,0), RoomId = 4, CourseId = 2},
 
-                new Scheduler{ Id = 5, DateTime = new DateTime(2018,1,16,18,0,0), RoomId = 1, CourseId = 3},
-                new Scheduler{ Id = 6, DateTime = new DateTime(2018,1,16,16,0,0), RoomId = 2, CourseId = 3},
+                new Scheduler{ Id = 5, DateTime = new DateTime(2018,1,16,18,0,0), RoomId = 5, CourseId = 3},
+                new Scheduler{ Id = 6, DateTime = new DateTime(2018,1,16,16,0,0), RoomId = 6, CourseId = 3},
 
-                new Scheduler{ Id = 7, DateTime = new DateTime(2018,1,17,10,0,0), RoomId = 1, CourseId = 4},
-                new Scheduler{ Id = 8, DateTime = new DateTime(2018,1,10,10,0,0), RoomId = 1, CourseId = 4},
+                new Scheduler{ Id = 7, DateTime = new DateTime(2018,1,17,10,0,0), RoomId = 7, CourseId = 4},
+                new Scheduler{ Id = 8, DateTime = new DateTime(2018,1,10,10,0,0), RoomId = 8, CourseId = 4},
 
-                new Scheduler{ Id = 6, DateTime = new DateTime(2018,1,18,12,0,0), RoomId = 2, CourseId = 5},
-                new Scheduler{ Id = 7, DateTime = new DateTime(2018,1,25,16,0,0), RoomId = 2, CourseId = 5},
+                new Scheduler{ Id = 6, DateTime = new DateTime(2018,1,18,12,0,0), RoomId = 9, CourseId = 5},
+                new Scheduler{ Id = 7, DateTime = new DateTime(2018,1,25,16,0,0), RoomId = 10, CourseId = 5},
 
                 new Scheduler{ Id = 8, DateTime = new DateTime(2018,1,19,14,0,0), RoomId = 1, CourseId = 6},
-                new Scheduler{ Id = 9, DateTime = new DateTime(2018,1,19,18,0,0), RoomId = 1, CourseId = 6},
+                new Scheduler{ Id = 9, DateTime = new DateTime(2018,1,19,18,0,0), RoomId = 2, CourseId = 6},
 
-                new Scheduler{ Id = 10, DateTime = new DateTime(2018,1,20,16,0,0), RoomId = 1, CourseId = 7},
-                new Scheduler{ Id = 11, DateTime = new DateTime(2018,1,20,8,0,0), RoomId = 1, CourseId = 7},
+                new Scheduler{ Id = 10, DateTime = new DateTime(2018,1,20,16,0,0), RoomId = 3, CourseId = 7},
+                new Scheduler{ Id = 11, DateTime = new DateTime(2018,1,20,8,0,0), RoomId = 4, CourseId = 7},
 
-                new Scheduler{ Id = 12, DateTime = new DateTime(2018,1,21,18,0,0), RoomId = 2, CourseId = 5},
-                new Scheduler{ Id = 13, DateTime = new DateTime(2018,1,22,18,0,0), RoomId = 2, CourseId = 3},
-                new Scheduler{ Id = 14, DateTime = new DateTime(2018,1,14,8,0,0), RoomId = 2, CourseId = 1},
+                new Scheduler{ Id = 12, DateTime = new DateTime(2018,1,21,18,0,0), RoomId = 5, CourseId = 5},
+                new Scheduler{ Id = 13, DateTime = new DateTime(2018,1,22,18,0,0), RoomId = 6, CourseId = 3},
+                new Scheduler{ Id = 14, DateTime = new DateTime(2018,1,14,8,0,0), RoomId = 7, CourseId = 1},
             };
             context.Schedulers.AddOrUpdate(schedulers);
             context.SaveChanges();
