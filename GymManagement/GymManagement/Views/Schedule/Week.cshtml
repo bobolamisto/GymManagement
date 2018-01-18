@@ -59,11 +59,11 @@
                     {
                         if (course.IsAvailable)
                         {
-                            <input type="submit" class="btn-primary" name="@course.schedulerId" value="@course.courseName" title="Click to join!" />
+                            <input type="submit" class="btn btn-primary" name="@course.SchedulerId" value="@course.CourseName" title="Room: @course.RoomName, Availability: @course.AvailableSeatsNr &#013;Click to join!" />
                         }
                         else
                         {
-                            <input disabled type="submit" class="btn-primary" style="background-color:darkgrey" value="@course.courseName" title="No availability!" />
+                            <input disabled type="submit" class="btn btn-primary" style="background-color:darkgrey" value="@course.CourseName" title="No availability!" />
                         }
                     }
 

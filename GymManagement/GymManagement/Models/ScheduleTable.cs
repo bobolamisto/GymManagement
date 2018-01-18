@@ -42,10 +42,12 @@ namespace GymManagement.Models
 
     public class ScheduleCourseModel
     {
-        public int courseId { get; set; }
-        public int schedulerId { get; set; }
-        public string courseName { get; set; }
+        public int CourseId { get; set; }
+        public int SchedulerId { get; set; }
+        public string CourseName { get; set; }
         public bool IsAvailable { get; set; }
+        public string RoomName { get; set; }
+        public int AvailableSeatsNr { get; set; }
     }
 
     public class UserScheduleModel
