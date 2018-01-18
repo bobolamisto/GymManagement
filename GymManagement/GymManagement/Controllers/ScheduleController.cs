@@ -20,14 +20,27 @@ namespace GymManagement.Controllers
         // GET: UserScheduler
         public ActionResult Index()
         {
-            var model = PrepareScheduleModelList();
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            var currentWeek = ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            return RedirectToAction("Week/"+ currentWeek);
+
+        }
+
+        public ActionResult Week(int id)
+        {
+            var model = PrepareScheduleModelList(id);
             return View(model);
         }
 
-        private List<ScheduleTable> PrepareScheduleModelList()
+        private List<ScheduleTable> PrepareScheduleModelList(int week)
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
+            CultureInfo ci = CultureInfo.CurrentCulture;
             var x = db.Schedulers.ToList();
             List<ScheduleTable> scheduleTable = new List<ScheduleTable>();
+            
             var dificulty = Request.Form["CourseDificulty"];
             if (dificulty == null)
                 ViewData["selectedDifficulty"] = CourseDifficulty.All;
@@ -39,9 +52,9 @@ namespace GymManagement.Controllers
                 ScheduleCourseModel[] scheduleCourseModels = new ScheduleCourseModel[7];
                 foreach (var schedule in x)
                 {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
-                    CultureInfo ci = CultureInfo.CurrentCulture;
-                    if (ci.Calendar.GetWeekOfYear(schedule.DateTime, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) == ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday))
+
+
+                    if (ci.Calendar.GetWeekOfYear(schedule.DateTime, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) == week)
                     {
                         Course course = db.Courses.ToList().Where(c => c.Id == schedule.CourseId).FirstOrDefault();
                         if (dificulty == null || dificulty == "All" || course.Dificulty.ToString() == dificulty)
@@ -58,7 +71,7 @@ namespace GymManagement.Controllers
                                         courseId = course.Id,
                                         schedulerId = schedule.Id,
                                         courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        IsAvailable = isAvailable,
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Tuesday"))
@@ -148,67 +161,6 @@ namespace GymManagement.Controllers
                 db.UserSchedulers.Add(userScheduler);
                 db.SaveChanges();
             }
-        }
-
-        // GET: UserScheduler/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserScheduler userScheduler = db.UserSchedulers.Find(id);
-            if (userScheduler == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.SchedulerId = new SelectList(db.Schedulers, "Id", "Id", userScheduler.SchedulerId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", userScheduler.UserId);
-            return View(userScheduler);
-        }
-
-        // POST: UserScheduler/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,SchedulerId")] UserScheduler userScheduler)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(userScheduler).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.SchedulerId = new SelectList(db.Schedulers, "Id", "Id", userScheduler.SchedulerId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", userScheduler.UserId);
-            return View(userScheduler);
-        }
-
-        // GET: UserScheduler/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserScheduler userScheduler = db.UserSchedulers.Find(id);
-            if (userScheduler == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userScheduler);
-        }
-
-        // POST: UserScheduler/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            UserScheduler userScheduler = db.UserSchedulers.Find(id);
-            db.UserSchedulers.Remove(userScheduler);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
