@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GymManagement.Controllers.AccountController" Collapsed="true">
+    <Position X="1.25" Y="5.25" Width="1.5" />
+    <NestedTypes>
+      <Class Name="GymManagement.Controllers.AccountController.ChallengeResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\AccountController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAChACAAAAAAAAFgEgAABAABMKIAAAMRAAQgAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserManager" />
+      <Property Name="SignInManager" />
+      <Property Name="AuthenticationManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Data.ApplicationDbContext">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <AssociationLine Name="Addresses" Type="GymManagement.Models.Address" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="2.094" />
+        <Point X="8.187" Y="2.094" />
+        <Point X="8.187" Y="0.938" />
+        <Point X="9.25" Y="0.938" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Courses" Type="GymManagement.Models.Course" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="2.125" />
+        <Point X="8.288" Y="2.125" />
+        <Point X="8.288" Y="1.64" />
+        <Point X="11" Y="1.64" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Rooms" Type="GymManagement.Models.Room" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="3.188" />
+        <Point X="8.413" Y="3.188" />
+        <Point X="8.413" Y="3.531" />
+        <Point X="11.25" Y="3.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Schedulers" Type="GymManagement.Models.Scheduler" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="3.312" />
+        <Point X="8.22" Y="3.312" />
+        <Point X="8.22" Y="3.923" />
+        <Point X="9.25" Y="3.923" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Subscriptions" Type="GymManagement.Models.Subscription" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="3.375" />
+        <Point X="8.07" Y="3.375" />
+        <Point X="8.07" Y="4.531" />
+        <Point X="11.25" Y="4.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="UserCourses" Type="GymManagement.Models.UserCourse" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.938" Y="3.425" />
+        <Point X="7.938" Y="5.031" />
+        <Point X="9.25" Y="5.031" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAgIAAAAACAAACABAABEAAAAEEABAAAAA=</HashCode>
+      <FileName>Data\ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Addresses" />
+      <Property Name="Courses" />
+      <Property Name="CourseTypes" />
+      <Property Name="Feedbacks" />
+      <Property Name="Packages" />
+      <Property Name="Rooms" />
+      <Property Name="Schedulers" />
+      <Property Name="Subscriptions" />
+      <Property Name="UserCourses" />
+      <Property Name="UserSchedulers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.CoursesController" Collapsed="true">
+    <Position X="1" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACEAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\CoursesController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.FeedbacksController" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\FeedbacksController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.ManageController" Collapsed="true">
+    <Position X="1" Y="3.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="GymManagement.Controllers.ManageController.ManageMessageId" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\ManageController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="databaseContext" Type="GymManagement.Data.ApplicationDbContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="3.596" />
+        <Point X="7" Y="3.596" />
+        <Point X="7" Y="3.425" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.185" Y="1.52" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAABACAQiAAgAAABEFhACAAAAEAIMIAAEEEgIAkAAA=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="databaseContext" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.ScheduleController" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAAAAAAAAAEABAAEAAIAAAAA=</HashCode>
+      <FileName>Controllers\ScheduleController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.SubscriptionController" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQACAAAAAAAAAAAAAAAEAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\SubscriptionController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.UserCoursesController" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="2.25" />
+    <AssociationLine Name="db" Type="GymManagement.Data.ApplicationDbContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="3.096" />
+        <Point X="5.375" Y="3.096" />
+        <Point X="5.375" Y="3.062" />
+        <Point X="6.5" Y="3.062" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\UserCoursesController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Controllers.UserSchedulerController" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="2.25" />
+    <AssociationLine Name="db" Type="GymManagement.Data.ApplicationDbContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="4.096" />
+        <Point X="7.312" Y="4.096" />
+        <Point X="7.312" Y="3.425" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.303" Y="1.091" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAABAAAAA=</HashCode>
+      <FileName>Controllers\UserSchedulerController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GymManagement.Models.ExternalLoginConfirmationViewModel" Collapsed="true">
+    <Position X="1.25" Y="7.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.ExternalLoginListViewModel" Collapsed="true">
+    <Position X="1.25" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.SendCodeViewModel" Collapsed="true">
+    <Position X="5.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.VerifyCodeViewModel" Collapsed="true">
+    <Position X="1.25" Y="10" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAEAAAAAAAgAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.ForgotViewModel" Collapsed="true">
+    <Position X="5.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.LoginViewModel" Collapsed="true">
+    <Position X="3.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.RegisterViewModel" Collapsed="true">
+    <Position X="1.25" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAAAQAAAAAAAAAACAAAAAAAAIAg=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.ResetPasswordViewModel" Collapsed="true">
+    <Position X="3.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAgAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.ForgotPasswordViewModel" Collapsed="true">
+    <Position X="4.5" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.ApplicationSignInManager" Collapsed="true">
+    <Position X="3.75" Y="5.75" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.ApplicationUserManager" Collapsed="true">
+    <Position X="4.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Address" Collapsed="true">
+    <Position X="9.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAAAAAAAAIAAACAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Course" Collapsed="true">
+    <Position X="11" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAgAgAAAAAACEAQIAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.CourseType" Collapsed="true">
+    <Position X="9.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\CourseType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Feedback" Collapsed="true">
+    <Position X="11" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAHAAAAAAAAAAAAAIAAAAgAAAAAAAABAAAACAAAAAA=</HashCode>
+      <FileName>Models\Feedback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Package" Collapsed="true">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAAQAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Package.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Room" Collapsed="true">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABCAAAAAAAAgAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Scheduler" Collapsed="true">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGACACAAAAAAAAAJAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Scheduler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.Subscription" Collapsed="true">
+    <Position X="11.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAEAAAAA=</HashCode>
+      <FileName>Models\Subscription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.UserCourse" Collapsed="true">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAHAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserCourse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GymManagement.Models.UserScheduler" Collapsed="true">
+    <Position X="12.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAgAAEAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Models\UserScheduler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Microsoft.Owin.Security.IAuthenticationManager" Collapsed="true">
+    <Position X="4.25" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
