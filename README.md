@@ -1,7 +1,5 @@
 # GymManagement
 ## CodeStars2.0
-### Team component:
-Manea Raluca; Toader Alina; Caleniuc Andrei; Neamtu Daniel; Ursuta Claudiu; Vlad Andrei; Vorobet Bogdan
 
 ### Installing
 
@@ -45,3 +43,18 @@ Start the application
 ### Password for user: Test1.
 
 ## Enjoy ! 
+
+## Built With
+
+* [ASP.NET](https://www.asp.net/) - The web framework used
+* [Entity Framework](https://docs.microsoft.com/en-us/ef/) - Dependency Management
+
+## Authors
+* **Manea Raluca** - *Full stack dev* 
+* **Toader Alina** - *Full stack dev* 
+* **Caleniuc Andrei** - *Full stack dev* 
+* **Neamtu Daniel** - *Full stack dev* 
+* **Ursuta Claudiu** - *Full stack dev* 
+* **Vlad Andrei** - *Full stack dev* 
+* **Vorobet Bogdan** - *Full stack dev* 
+
