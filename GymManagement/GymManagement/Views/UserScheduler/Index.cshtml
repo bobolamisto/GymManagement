@@ -73,7 +73,7 @@
                                         <h5 class="modal-title" id="exampleModalLabel">Unjoin @course.courseName?</h5>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="alert-area"></div>
+                                        <div class="alert-area"></div>
                                         <div>Are you sure you want to unjoin this course?</div>
                                     </div>
                                     <div class="modal-footer">
@@ -112,7 +112,7 @@
     });
 
     function newAlert(type, message) {
-        $("#alert-area").append($("<div class='alert alert-" + type + " fade in' data-alert><p> " + message + " </p></div>"));
+        $(".alert-area").append($("<div class='alert alert-" + type + " fade in' data-alert><p> " + message + " </p></div>"));
         $(".alert").delay(2000).fadeOut("slow", function () { $(this).remove(); });
     }
 

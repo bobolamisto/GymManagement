@@ -172,7 +172,7 @@ namespace GymManagement.Controllers
         }
 
         [HttpPost]
-        public void Create(int schedulerId)
+        public ActionResult Create(int schedulerId)
         {
 
             var userId = User.Identity.GetUserId();
@@ -185,6 +185,11 @@ namespace GymManagement.Controllers
 
                 db.UserSchedulers.Add(userScheduler);
                 db.SaveChanges();
+                return Json("success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("error", JsonRequestBehavior.AllowGet);
             }
         }
 
