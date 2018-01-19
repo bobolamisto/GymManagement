@@ -67,78 +67,95 @@ namespace GymManagement.Controllers
                         if (dificulty == null || dificulty == "All" || course.Dificulty.ToString() == dificulty)
                         {
                             var roomId = db.Courses.Where(c => c.Id == schedule.CourseId).Select(c => schedule.RoomId).FirstOrDefault();
+                            var roomName = db.Courses.Where(c => c.Id == schedule.CourseId).Include(c=> schedule.Room).Select(c => schedule.Room.Name).FirstOrDefault();
                             var roomCapacity = db.Rooms.Where(r => r.Id == roomId).Select(r => r.NumberOfSeats).FirstOrDefault();
-                            var isAvailable = db.UserSchedulers.Where(us => us.SchedulerId == schedule.Id).Count() < roomCapacity ? true : false;
+                            var bookedSeats = db.UserSchedulers.Where(us => us.SchedulerId == schedule.Id).Count();
+                            var availableSeatsNr = roomCapacity - bookedSeats;
+                            var isAvailable = bookedSeats < roomCapacity ? true : false;
                             if (schedule.DateTime.Hour >= i && schedule.DateTime.Hour < i + 2)
                             {
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Monday"))
                                 {
                                     scheduleCourseModels[0] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
                                         IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Tuesday"))
                                 {
                                     scheduleCourseModels[1] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
+                                        IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Wednesday"))
                                 {
                                     scheduleCourseModels[2] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
+                                        IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Thursday"))
                                 {
                                     scheduleCourseModels[3] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
+                                        IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Friday"))
                                 {
                                     scheduleCourseModels[4] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
+                                        IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Saturday"))
                                 {
                                     scheduleCourseModels[5] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
+                                        IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                                 if (schedule.DateTime.DayOfWeek.ToString().Equals("Sunday"))
                                 {
                                     scheduleCourseModels[6] = new ScheduleCourseModel
                                     {
-                                        courseId = course.Id,
-                                        schedulerId = schedule.Id,
-                                        courseName = course.Name,
-                                        IsAvailable = isAvailable
+                                        CourseId = course.Id,
+                                        SchedulerId = schedule.Id,
+                                        CourseName = course.Name,
+                                        IsAvailable = isAvailable,
+                                        RoomName = roomName,
+                                        AvailableSeatsNr = availableSeatsNr
                                     };
                                 }
                             }
