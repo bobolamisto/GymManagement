@@ -11,6 +11,7 @@ using GymManagement.Models;
 
 namespace GymManagement.Controllers
 {
+    [Authorize]
     public class AddressesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

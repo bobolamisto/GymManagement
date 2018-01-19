@@ -38,11 +38,9 @@ Step 6:
 Start the application
 ```
 
-
 ### User for test: test@yahoo.com 
 ### Password for user: Test1.
 
-## Enjoy ! 
 
 ## Built With
 

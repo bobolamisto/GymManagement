@@ -11,10 +11,10 @@ using GymManagement.Models;
 
 namespace GymManagement.Controllers
 {
-    public class CoursesController : Controller
+    [Authorize]
+      public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Courses
         public ActionResult Index()
         {

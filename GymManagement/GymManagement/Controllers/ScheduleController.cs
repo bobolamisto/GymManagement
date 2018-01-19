@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GymManagement.Controllers
 {
+    [Authorize]
     public class ScheduleController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

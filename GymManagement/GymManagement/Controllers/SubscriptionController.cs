@@ -9,9 +9,12 @@ using System.Web.Mvc;
 
 namespace GymManagement.Controllers
 {
+    [Authorize]
     public class SubscriptionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private EmailService emailService = new EmailService();
+
 
         // GET: Subscription
         public async Task<ActionResult> Index()

@@ -12,10 +12,13 @@ using Microsoft.AspNet.Identity;
 
 namespace GymManagement.Controllers
 {
+    [Authorize]
     public class UserSchedulerController : Controller
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
+        private EmailService emailService = new EmailService();
+
 
         private int GetWeekOfYear(DateTime time)
         {

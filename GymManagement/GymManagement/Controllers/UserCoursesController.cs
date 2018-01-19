@@ -11,9 +11,12 @@ using GymManagement.Models;
 
 namespace GymManagement.Controllers
 {
+    [Authorize]
     public class UserCoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private EmailService emailService = new EmailService();
+
 
         // GET: UserCourses
         public ActionResult Index()

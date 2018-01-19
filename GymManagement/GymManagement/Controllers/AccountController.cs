@@ -17,9 +17,11 @@ namespace GymManagement.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private EmailService emailService;
 
         public AccountController()
         {
+            emailService = new EmailService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -156,13 +158,7 @@ namespace GymManagement.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    emailService.SendEmail(model.Email, "Register on Gym Management", "You succesfuly register on <a href=http://localhost:57960/> Gym Management</a>!");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -203,17 +199,11 @@ namespace GymManagement.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
+                
+            
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackurl = Url.Action("resetpassword", "account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "reset password", "please reset your password by clicking <a href=\"" + callbackurl + "\">here</a>");
+                emailService.SendEmail(user.Email, "reset password", "please reset your password by clicking <a href=\"" + callbackurl + "\">here</a>");
                 return RedirectToAction("forgotpasswordconfirmation", "account");
             }
 

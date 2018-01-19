@@ -11,11 +11,15 @@ using GymManagement.Models;
 
 namespace GymManagement.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private EmailService emailService = new EmailService();
+
 
         // GET: Users
+        [Authorize]
         public ActionResult Index()
         {
             var users = db.Users.Include(u => u.Subscription);
@@ -137,7 +141,9 @@ namespace GymManagement.Controllers
             var feedback = new Feedback { Text = model.Text, Date = DateTime.Now, UserFullName = customer, UserId = model.TrainerId };
             db.Feedbacks.Add(feedback);
             db.SaveChanges();
-            //return RedirectToAction("TrainerDetails", new { id = model.TrainerId });
+
+            var trainerMail = db.Users.FirstOrDefault(u => u.Id == model.TrainerId).Email;
+            emailService.SendEmail(trainerMail, "New feedback for you", "You have a new feedback! Check the link: <a href=http://localhost:57960/Users/TrainerDetails/" + model.TrainerId + " /> here</a>!");
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
