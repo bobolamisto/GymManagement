@@ -6,6 +6,7 @@
 
 <h2>All the courses</h2>
 <a id="previous-week-button" type="button" class="btn btn-secondary" href="#">Previous Week</a>
+@ViewData["currentWeek"]
 <a id="next-week-button" type="button" class="btn btn-secondary" href="#">Next week</a>
 @using (Html.BeginForm("UpdateScheduleTable"))
 {
@@ -64,7 +65,7 @@
                         else
                         {
                             <input disabled type="submit" class="btn btn-primary" style="background-color:darkgrey" value="@course.CourseName" title="No availability!" />
-                        }
+                       }
                     }
 
                 </td>
@@ -79,26 +80,26 @@
         var path = window.location.pathname.split("/");
         var week = path[path.length - 1];
         if (week == "1") {
-            $("#previous-week-button").attr("disabled","");
+            $("#previous-week-button").attr("disabled", "");
         }
         if (week == 52) {
             $("#next-week-button").attr("disabled", "");
         }
         $("#previous-week-button").attr("href", ("/Schedule/Week/" + (parseInt(week) - 1)))
         $("#next-week-button").attr("href", ("/Schedule/Week/" + (parseInt(week) + 1)))
-    })
+    });
 
     $(".btn-primary").click(function () {
-    
+
         $.ajax({
             type: "POST",
-            url: "@Html.Raw(Url.Action("Create","Schedule"))" ,
+            url: "@Html.Raw(Url.Action("Create","Schedule"))",
             data: {
                 schedulerId: $(this).attr("name")
             }
         }).done(function () {
             window.location = "@Html.Raw(Url.Action("Index","Schedule"))";
             alert("Inscrierea a avut loc cu success");
-        })
-    })
+        });
+    });
 </script>

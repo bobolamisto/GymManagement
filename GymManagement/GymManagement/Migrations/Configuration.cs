@@ -84,7 +84,7 @@
             {
                 new Address{Id = 1, Name = "Main Building", Street = "Mihail Kogalniceanu", StreetNumber = 1, Latitude = 46.7677898, Longitude = 23.593690700000025},
                 new Address{Id = 2, Name = "Second Building", Street = "Strada Dunării", StreetNumber = 22, Latitude = 46.77616219999999, Longitude = 23.628539100000012},
-                new Address{Id = 3, Name = "Third Building", Street = "Strada Dunării", StreetNumber = 22, Latitude = 46.7608188, Longitude = 23.579431099999965},
+                new Address{Id = 3, Name = "Third Building", Street = "Strada Ciprian Porumbescu", StreetNumber = 20, Latitude = 46.7608188, Longitude = 23.579431099999965},
             };
             context.Addresses.AddOrUpdate(addresses);
             context.SaveChanges();

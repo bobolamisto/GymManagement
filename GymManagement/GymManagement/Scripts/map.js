@@ -6,12 +6,11 @@
             if (buildings[i].Id === id)
             {
                 building = buildings[i];
-                building.Street = building.Street + " " + building.StreetNumber;
                 break;
             }
         window.latitude = building.Latitude;
         window.longitude = building.Longitude;
-        window.street = building.Street;
+        window.street = building.Street + " " + building.StreetNumber;
         $("#map").empty();
         initMap();
     });
@@ -28,6 +27,7 @@ function initMap() {
     var me = new google.maps.Marker({
         position: loc,
         map: window.map,
+        label: window.street,
         animation: google.maps.Animation.BOUNCE,
     });
 
