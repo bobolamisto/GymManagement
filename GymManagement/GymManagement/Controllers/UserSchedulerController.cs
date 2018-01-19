@@ -47,6 +47,17 @@ namespace GymManagement.Controllers
             else
                 ViewData["selectedDifficulty"] = (CourseDifficulty)Enum.Parse(typeof(CourseDifficulty), dificulty);
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            var week = (int)TempData["currentWeekNumber"];
+            var currentWeek = ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            var diff = (week - currentWeek) * 7;
+            var firstDay = DateTime.Now.AddDays(diff);
+            var dayOfWeek = (int)firstDay.DayOfWeek;
+            diff -= dayOfWeek - 1;
+            firstDay = DateTime.Now.AddDays(diff);
+            ViewData["currentWeek"] = firstDay.ToShortDateString() + " - " + firstDay.AddDays(6).ToShortDateString();
+
             for (var i = 8; i <= 18; i += 2)
             {
                 String courseHours = (i).ToString() + " - " + (i + 2).ToString();
@@ -54,7 +65,8 @@ namespace GymManagement.Controllers
                 foreach (var schedule in userSchedulers)
                 {
                     Course course = db.Courses.ToList().Where(c => c.Id == schedule.Scheduler.CourseId).FirstOrDefault();
-                    if (dificulty == "All" || dificulty == null || course.Dificulty.ToString() == dificulty)
+                    if ((dificulty == "All" || dificulty == null || course.Dificulty.ToString() == dificulty) &&
+                        ci.Calendar.GetWeekOfYear(schedule.Scheduler.DateTime, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) == week)
                     {
 
                         if (schedule.Scheduler.DateTime.Hour >= i && schedule.Scheduler.DateTime.Hour < i + 2)
@@ -139,7 +151,20 @@ namespace GymManagement.Controllers
         // GET: UserScheduler
         public ActionResult Index()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            if (TempData["currentWeekNumber"] == null)
+            {
+                TempData["currentWeekNumber"] = ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            }
             return View(Courses());
+        }
+
+        public ActionResult SetWeek(int id)
+        {
+            TempData["currentWeekNumber"] = id;
+            
+            return RedirectToAction("Index");
         }
 
         // GET: UserScheduler/Details/5

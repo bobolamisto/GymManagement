@@ -6,12 +6,16 @@
 
 <h2>Courses I've joined</h2>
 
+<a id="previous-week-button" class="btn btn-secondary">Previous Week</a>
+@ViewData["currentWeek"]
+<a id="next-week-button" type="button" class="btn btn-secondary" href="#">Next week</a>
+
 @using (Html.BeginForm("UpdateScheduleTable"))
 {
     <div class="col-md-10">
         @Html.Label("Filter courses by their difficulty  ")
         @Html.DropDownList("CourseDificulty", new SelectList(Enum.GetValues(typeof(GymManagement.Models.CourseDifficulty)), ViewData["selectedDifficulty"]),
-                 new { onchange = "this.form.submit();" })
+                  new { onchange = "this.form.submit();" })
 
     </div>
 }
@@ -92,6 +96,21 @@
 </table>
 
 <script>
+    $(document).ready(function () {
+        var week = @TempData["currentWeekNumber"];
+        if (week == 1) {
+            $("#previous-week-button").attr("disabled", "");
+        }
+        if (week == 52) {
+            $("#next-week-button").attr("disabled", "");
+        }
+        $("#previous-week-button").click(function () {
+            var w = @TempData["currentWeekNumber"] - 1;
+             window.location.href = "/UserScheduler/SetWeek/" + w;
+        });
+        $("#next-week-button").attr("href", ("/Schedule/Week/" + (parseInt(week) + 1)))
+    });
+
     function newAlert(type, message) {
         $("#alert-area").append($("<div class='alert alert-" + type + " fade in' data-alert><p> " + message + " </p></div>"));
         $(".alert").delay(2000).fadeOut("slow", function () { $(this).remove(); });

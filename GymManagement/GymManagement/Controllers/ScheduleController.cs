@@ -23,7 +23,6 @@ namespace GymManagement.Controllers
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("ro-RO");
             CultureInfo ci = CultureInfo.CurrentCulture;
             var currentWeek = ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
             return RedirectToAction("Week/"+ currentWeek);
 
         }
@@ -40,7 +39,15 @@ namespace GymManagement.Controllers
             CultureInfo ci = CultureInfo.CurrentCulture;
             var x = db.Schedulers.ToList();
             List<ScheduleTable> scheduleTable = new List<ScheduleTable>();
-            
+
+            var currentWeek = ci.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            var diff = (week - currentWeek) * 7;
+            var firstDay = DateTime.Now.AddDays(diff);
+            var dayOfWeek = (int)firstDay.DayOfWeek;
+            diff -= dayOfWeek - 1;
+            firstDay = DateTime.Now.AddDays(diff);
+            ViewData["currentWeek"] = firstDay.ToShortDateString() + " - " + firstDay.AddDays(6).ToShortDateString();
+
             var dificulty = Request.Form["CourseDificulty"];
             if (dificulty == null)
                 ViewData["selectedDifficulty"] = CourseDifficulty.All;
